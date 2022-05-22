@@ -28,7 +28,7 @@ class MainScreenInteractor @Inject constructor(
     }
 
     private fun mapProducts(list: List<Products>): List<Products> {
-        val s = list.sortedBy {
+        return list.sortedBy {
             when (it) {
                 is CardProductModel -> 1
                 is AccountProductModel -> 2
@@ -36,8 +36,5 @@ class MainScreenInteractor @Inject constructor(
                 is OfferCardModel -> 4
             }
         }
-
-        Log.e("TAG", "sort repository -> $s")
-        return s
     }
 }

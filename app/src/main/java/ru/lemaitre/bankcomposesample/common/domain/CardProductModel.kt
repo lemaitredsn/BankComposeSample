@@ -48,7 +48,7 @@ data class AccountProductModel(
     val typeAccount: TypeAccount = TypeAccount.CURRENT,
     val userNameAccount: String = typeAccount.title,
     val number: String = "",
-    val amount: String = "",
+    val amount: String = number.takeLast(4),
     val currency: Currency = Currency.RUBLE,
     val status: String?,
     val list: List<CardProductModel>? = null
@@ -58,8 +58,8 @@ data class CardProductModel(
     val typeCard: TypeCard = TypeCard.SALARY,
     val userNameCard: String = typeCard.title,
     val paySystem: PaySystem = PaySystem.MIR,
-    val endNumber: String = "4325",
     val number: String = "",
+    val endNumber: String = number.takeLast(4),
     val amount: String = "1523,12",
     val currency: Currency = Currency.RUBLE,
     val status: String? = null

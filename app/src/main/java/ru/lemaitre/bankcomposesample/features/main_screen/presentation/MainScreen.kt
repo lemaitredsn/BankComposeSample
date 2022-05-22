@@ -101,7 +101,14 @@ fun MainScreen(
                             products = product,
                             visible = visibleField
                         ) {
-                            navController.navigate(Screens.CardDetails.name + "/${product}")
+                            val number = if (product is AccountProductModel) {
+                                product.number
+                            } else if (product is CardProductModel) {
+                                product.number
+                            } else {
+                                throw IllegalArgumentException("неизвестный продукт")
+                            }
+                            navController.navigate(Screens.CardDetails.name + "/${number}")
                         }
                     }
                 }

@@ -3,21 +3,19 @@ package ru.lemaitre.bankcomposesample.features.detail_screen.domain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import ru.lemaitre.bankcomposesample.common.domain.StateData
-import ru.lemaitre.bankcomposesample.features.detail_screen.data.DetailProductDTO
 import ru.lemaitre.bankcomposesample.features.detail_screen.data.DetailRepositoryImpl
 import javax.inject.Inject
 
 class DetailUseCase @Inject constructor(
     private val detailRepository: DetailRepositoryImpl
 ) {
-    fun getDetails(number: String): Flow<StateData<DetailProductDTO>> = flow {
+    fun getDetails(number: String): Flow<StateData<DetailModel>> = flow {
         try {
-            emit(StateData.Loading<DetailProductDTO>())
-            val detail = detailRepository.getDetailByProduct(number)
-            emit(StateData.Success<DetailProductDTO>(detail))
-        } catch (e: Exception) {
+            emit(StateData.Loading<DetailModel>())
+            emit(StateData.Success<DetailModel>(detailRepository.getDetailByProduct(number)))
+        } catch (e: java.lang.Exception) {
             emit(
-                StateData.Error<DetailProductDTO>(e.localizedMessage ?: ERROR)
+                StateData.Error<DetailModel>(e.localizedMessage ?: ERROR)
             )
         }
     }

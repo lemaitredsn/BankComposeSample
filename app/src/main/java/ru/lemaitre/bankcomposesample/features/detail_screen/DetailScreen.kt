@@ -18,7 +18,12 @@ import ru.lemaitre.bankcomposesample.features.detail_screen.domain.HistoryItem
 
 @Composable
 fun DetailScreen(viewModel: DetailScreenViewModel) {
-
+    if (viewModel.detailProduct.value.isLoading) {
+        Text(text = "Загрузка")
+    }
+    if (viewModel.detailProduct.value.error != null) {
+        Text(text = "Ошибка")
+    }
     Column() {
         Box(
             modifier = Modifier
@@ -39,7 +44,7 @@ fun DetailScreen(viewModel: DetailScreenViewModel) {
                     Spacer(modifier = Modifier.weight(1f))
                     Row() {
                         Text(
-                            text = "343$",
+                            text = "${viewModel.detailProduct.value.details.sum}$",
                             modifier = Modifier
                                 .padding(8.dp)
                                 .weight(1f)
@@ -47,14 +52,17 @@ fun DetailScreen(viewModel: DetailScreenViewModel) {
                     }
                     Row() {
                         Text(
-                            text = "1234 4321 5678 8765",
+                            text = viewModel.detailProduct.value.details.number ?: "",
                             modifier = Modifier
                                 .padding(8.dp)
                                 .weight(2f)
                         )
                         Spacer(modifier = Modifier.weight(1f))
                         Image(
-                            painter = painterResource(id = R.drawable.mastercard_icon),
+                            painter = painterResource(
+                                id = viewModel.detailProduct.value.details.icon
+                                    ?: R.drawable.ic_card
+                            ),
                             contentDescription = "drawable",
                             modifier = Modifier
                                 .padding(8.dp)
@@ -72,13 +80,7 @@ fun DetailScreen(viewModel: DetailScreenViewModel) {
                 .weight(3f)
                 .fillMaxWidth()
         ) {
-            val history = listOf( //todo viewModel state get history
-                HistoryItem(123.0, true, "Магазин на районе"),
-                HistoryItem(33000.0, false, "Перечисление зп"),
-                HistoryItem(1223.0, true, "Магазин мастер спорта"),
-                HistoryItem(3121.0, true, "Магазин самнеси"),
-            )
-            history.forEach {
+            viewModel.detailProduct.value.details.historyProduct.forEach {
                 HistoryItemView(history = it)
             }
         }
