@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BankComposeSample</string>
+    <string name="payments">Платежи</string>
+    <string name="transfers">Переводы</string>
+    <string name="samples">Шаблоны</string>
+    <string name="main">Главный</string>
+    <string name="yet">Еще</string>
+    <string name="profile">Профиль</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="main_screen_profile">Профиль</string>
+    <string name="main_screen_cards">Карты</string>
+    <string name="main_screen_show_cards">Показать карты</string>
+    <string name="main_screen_notifications">Уведомления</string>
+    <string name="main_screen_add_card">Добавить карту</string>
+    <string name="main_screen_card_end">* %1$s</string>
+    <string name="main_screen_accounts">Счета</string>
+</resources>
