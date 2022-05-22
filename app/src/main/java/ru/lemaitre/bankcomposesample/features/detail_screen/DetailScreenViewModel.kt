@@ -1,8 +1,9 @@
 package ru.lemaitre.bankcomposesample.features.detail_screen
 
 import android.app.Activity
-import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -12,15 +13,26 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.EntryPointAccessors
 import ru.lemaitre.bankcomposesample.common.main.MainActivity
+import ru.lemaitre.bankcomposesample.features.detail_screen.domain.DetailState
+import ru.lemaitre.bankcomposesample.features.detail_screen.domain.DetailUseCase
 
 
 class DetailScreenViewModel @AssistedInject constructor(
-    @Assisted private val productData: String
+    @Assisted private val productData: String,
+    private val useCase: DetailUseCase
 ): ViewModel() {
 
     init {
-        Log.e("TAG", "productData $productData")
+        getDetails(productData) //number
     }
+
+    private val _detailProduct = mutableStateOf(DetailState())
+    val detailProduct: State<DetailState> = _detailProduct
+
+    private fun getDetails(productData: String){
+//        useCase.getDetails()
+    }
+
 
     @AssistedFactory
     interface Factory {

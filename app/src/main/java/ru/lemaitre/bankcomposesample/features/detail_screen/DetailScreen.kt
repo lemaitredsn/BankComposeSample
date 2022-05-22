@@ -1,40 +1,24 @@
 package ru.lemaitre.bankcomposesample.features.detail_screen
 
-import android.os.Parcelable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import kotlinx.android.parcel.Parcelize
 import ru.lemaitre.bankcomposesample.R
-import ru.lemaitre.bankcomposesample.ui.theme.GrayAlpha54
+import ru.lemaitre.bankcomposesample.features.detail_screen.domain.HistoryItem
 
 @Composable
 fun DetailScreen(viewModel: DetailScreenViewModel) {
-    //agr to viewmodel and start usecase
-    Scaffold {
-        Text(text = "Детали product", modifier = Modifier.padding(24.dp))
-    }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun DetailScreenWithPreview() {
     Column() {
         Box(
             modifier = Modifier
@@ -88,7 +72,7 @@ fun DetailScreenWithPreview() {
                 .weight(3f)
                 .fillMaxWidth()
         ) {
-            val history = listOf(
+            val history = listOf( //todo viewModel state get history
                 HistoryItem(123.0, true, "Магазин на районе"),
                 HistoryItem(33000.0, false, "Перечисление зп"),
                 HistoryItem(1223.0, true, "Магазин мастер спорта"),
@@ -99,7 +83,6 @@ fun DetailScreenWithPreview() {
             }
         }
     }
-
 }
 
 @Composable
@@ -127,6 +110,3 @@ fun HistoryItemView(history: HistoryItem) {
         }
     }
 }
-
-data class HistoryItem(val sum: Double, val isCredit: Boolean, val description: String)
-

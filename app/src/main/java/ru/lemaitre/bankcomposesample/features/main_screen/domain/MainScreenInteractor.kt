@@ -17,7 +17,6 @@ class MainScreenInteractor @Inject constructor(
         try {
             emit(StateData.Loading<List<Products>>())
             val products = mapProducts(repository.getProducts())
-            Log.e("TAG", "products ${products.joinToString()}")
             emit(StateData.Success<List<Products>>(products))
         }catch (e: java.lang.Exception){
             emit(
