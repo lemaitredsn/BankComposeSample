@@ -21,6 +21,8 @@ import ru.lemaitre.bankcomposesample.features.detail_screen.provideDetailScreenV
 import ru.lemaitre.bankcomposesample.features.main.AppBottomNavigation
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.MainScreen
 import ru.lemaitre.bankcomposesample.features.notification_screen.NotificationsScreen
+import ru.lemaitre.bankcomposesample.features.offer_detail.OfferDetailScreen
+import ru.lemaitre.bankcomposesample.features.offer_detail.provideOfferDetailViewModel
 
 @Preview
 @Composable
@@ -84,7 +86,26 @@ fun MainScreenConfiguration() {
                 )
             ) { entry ->
                 DetailScreen(
-                    viewModel = provideDetailScreenViewModel(entry.arguments?.getString("product") ?: throw IllegalArgumentException("DetailScreenTest: product not be null "))
+                    viewModel = provideDetailScreenViewModel(
+                        entry.arguments?.getString("product") //fixme move to constants
+                            ?: throw IllegalArgumentException("DetailScreenTest: product not be null ")
+                    )
+                )
+            }
+            composable(
+                route = Screens.OfferDetail.name + "/{offerId}",
+                arguments = listOf(
+                    navArgument("offerId") {
+                        type = NavType.StringType
+                        nullable = false
+                    }
+                )
+            ) { entry ->
+                OfferDetailScreen(
+                    viewModel = provideOfferDetailViewModel(
+                        entry.arguments?.getString("offerId")
+                            ?: throw IllegalArgumentException("Offer detail screen: offer id not be null")
+                    )
                 )
             }
         }
