@@ -6,6 +6,7 @@ import ru.lemaitre.bankcomposesample.common.domain.*
 import ru.lemaitre.bankcomposesample.features.detail_screen.domain.DetailModel
 import ru.lemaitre.bankcomposesample.features.detail_screen.domain.HistoryItem
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.OffersModel
+import ru.lemaitre.bankcomposesample.features.notification_screen.data.model.NotificationDTO
 import ru.lemaitre.bankcomposesample.features.profile_screen.data.ProfileDTO
 import ru.lemaitre.bankcomposesample.ui.theme.Purple700
 import ru.lemaitre.bankcomposesample.ui.theme.orange400
@@ -218,7 +219,7 @@ class Storage @Inject constructor() {
         Log.e("TAG", "getHistory $productNumber")
         val card = getCardProduct().firstOrNull() { it.number == productNumber }
         val account = getAccountProducts().firstOrNull() { it.number == productNumber }
-        val s =  when {
+        val s = when {
             card != null -> {
                 DetailModel(
                     sum = card.amount,
@@ -244,13 +245,31 @@ class Storage @Inject constructor() {
 
     }
 
-    fun getProfile(){
+    fun getProfile() =
         ProfileDTO(
             name = "Вячеслав",
             surname = "Иванов",
             R.drawable.ic_profile_circle,
             phone = "89143335566"
         )
+
+    fun getNotifications(): List<NotificationDTO> {
+        return listOf(
+            NotificationDTO(1,
+                "Сообщение от банка",
+                "Уважаемый клиент сообщаем Вам, что у нас появился новый продукт..."
+            ),
+            NotificationDTO(2,
+                "Выполнена транзакция",
+                "Поступление по карте 1321 3213 3213 0001 + 321р"
+            ),
+
+            NotificationDTO(3,
+                "Выполнена транзакция",
+                "Поступление по карте 1321 3213 3213 0001 + 321р"
+            )
+        )
     }
+
 
 }

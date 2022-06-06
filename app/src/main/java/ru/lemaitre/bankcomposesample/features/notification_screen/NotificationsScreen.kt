@@ -10,29 +10,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun NotificationsScreen(/*поидее сюда нужно добавлять список*/) {
+fun NotificationsScreen(viweModel: NotificationViewModel = hiltViewModel()) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        val mock = listOf(
-            NotificationModel("Сообщение от банка", 3221),
-            NotificationModel("Выполнена транзакция", 3321),
-            NotificationModel("Пополнение", 3424),
-        )
-        mock.forEach {
+        val notification = viweModel.notifications.value
+        notification.forEach {
             NotificationItem(it)
         }
     }
 }
 
 
-data class NotificationModel(val title: String, val id: Int)
+data class NotificationModel(val title: String, val id: Long, val descriptions: String)
 
 @Composable
-@Preview
-fun NotificationItem(notification: NotificationModel = NotificationModel(
-    "hello world", 2
-)) {
+fun NotificationItem(notification: NotificationModel) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically

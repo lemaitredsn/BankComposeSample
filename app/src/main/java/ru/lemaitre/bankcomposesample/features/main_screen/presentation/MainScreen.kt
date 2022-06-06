@@ -1,6 +1,5 @@
 package ru.lemaitre.bankcomposesample.features.main_screen.presentation
 
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
