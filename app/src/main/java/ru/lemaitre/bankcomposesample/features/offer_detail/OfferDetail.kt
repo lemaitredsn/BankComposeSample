@@ -20,11 +20,15 @@ import ru.lemaitre.bankcomposesample.R
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.OffersModel
 
 @Composable
-fun OfferDetailScreen(viewModel: OfferDetailViewModel){
-    val model = OffersModel()
-    Column(modifier = Modifier.fillMaxSize().background(
-        model.backgroundColor
-    )
+fun OfferDetailScreen(viewModel: OfferDetailViewModel) {
+    val model = viewModel.offer.value
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                model.backgroundColor
+            )
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

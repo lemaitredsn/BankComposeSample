@@ -6,6 +6,7 @@ import ru.lemaitre.bankcomposesample.R
 import ru.lemaitre.bankcomposesample.ui.theme.blueA400
 
 data class OffersModel(
+    val id: Long = 0,
     val title: String = "Депозит 23%",
     val description: String = "Акция действует до 23 февраля",
     @DrawableRes val icon: Int? = R.drawable.ic_card,

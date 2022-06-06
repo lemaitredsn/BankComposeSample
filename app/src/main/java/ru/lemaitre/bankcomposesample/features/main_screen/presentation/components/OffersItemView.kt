@@ -2,6 +2,7 @@ package ru.lemaitre.bankcomposesample.features.main_screen.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
@@ -23,7 +24,8 @@ import ru.lemaitre.bankcomposesample.ui.theme.GrayAlpha54
 
 @Composable
 fun OffersItemView(
-    offersModel: OffersModel
+    offersModel: OffersModel,
+    selected: (String) -> Unit
 ) {
     val localContext = LocalContext.current
     val dm = localContext.resources.displayMetrics
@@ -32,7 +34,8 @@ fun OffersItemView(
     Card(
         modifier = Modifier
             .padding(4.dp)
-            .width(cardWidth.dp),
+            .width(cardWidth.dp)
+            .clickable { selected(offersModel.title) },
         elevation = 8.dp
     ) {
         ConstraintLayout(modifier = Modifier.background((offersModel.backgroundColor))) {

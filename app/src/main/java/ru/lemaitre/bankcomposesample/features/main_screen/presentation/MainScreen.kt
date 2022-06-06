@@ -4,9 +4,12 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
@@ -69,7 +72,19 @@ fun MainScreen(
         ) {
             //offers
             item {
-                OfferView()
+                val horizontalScrollState = rememberScrollState()
+                Row(
+                    modifier = Modifier
+                        .horizontalScroll(state = horizontalScrollState)
+                ) {
+                    viewModel.offersModel.value.forEach { offer->
+                        OffersItemView(
+                            offersModel = offer
+                        ) {
+                            navController.navigate(Screens.OfferDetail.name + "/${offer.id}")
+                        }
+                    }
+                }
             }
             //products
             viewModel.commonProducts.value.products.groupBy {
@@ -101,12 +116,16 @@ fun MainScreen(
                             products = product,
                             visible = visibleField
                         ) {
-                            val number = if (product is AccountProductModel) {
-                                product.number
-                            } else if (product is CardProductModel) {
-                                product.number
-                            } else {
-                                throw IllegalArgumentException("неизвестный продукт")
+                            val number = when (product) {
+                                is AccountProductModel -> {
+                                    product.number
+                                }
+                                is CardProductModel -> {
+                                    product.number
+                                }
+                                else -> {
+                                    throw IllegalArgumentException("неизвестный продукт")
+                                }
                             }
                             navController.navigate(Screens.CardDetails.name + "/${number}")
                         }

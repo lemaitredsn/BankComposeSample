@@ -71,21 +71,25 @@ class Storage @Inject constructor() {
     suspend fun getOffers(): List<OffersModel> {
         return listOf(
             OffersModel(
+                id = 1,
                 title = "Кредит 15%",
                 description = "Акция действует до 14 мая",
                 backgroundColor = Purple700
             ),
             OffersModel(
+                id = 2,
                 title = "Депозит 23%",
                 description = "Акция до 25 июня",
                 backgroundColor = redA400
             ),
             OffersModel(
+                id = 3,
                 title = "Рассрочка 10",
                 description = "Рассрочка 10 месяцев",
                 backgroundColor = yellow400
             ),
             OffersModel(
+                id = 4,
                 title = "Карта МИР",
                 description = "Получи карту мир прямо в приложении",
                 backgroundColor = orange400
