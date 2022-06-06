@@ -6,6 +6,7 @@ import ru.lemaitre.bankcomposesample.common.domain.*
 import ru.lemaitre.bankcomposesample.features.detail_screen.domain.DetailModel
 import ru.lemaitre.bankcomposesample.features.detail_screen.domain.HistoryItem
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.OffersModel
+import ru.lemaitre.bankcomposesample.features.profile_screen.data.ProfileDTO
 import ru.lemaitre.bankcomposesample.ui.theme.Purple700
 import ru.lemaitre.bankcomposesample.ui.theme.orange400
 import ru.lemaitre.bankcomposesample.ui.theme.redA400
@@ -241,6 +242,15 @@ class Storage @Inject constructor() {
         Log.e("TAG", "$s")
         return s
 
+    }
+
+    fun getProfile(){
+        ProfileDTO(
+            name = "Вячеслав",
+            surname = "Иванов",
+            R.drawable.ic_profile_circle,
+            phone = "89143335566"
+        )
     }
 
 }

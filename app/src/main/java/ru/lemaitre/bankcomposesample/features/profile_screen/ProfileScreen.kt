@@ -4,16 +4,21 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import ru.lemaitre.bankcomposesample.R
+import ru.lemaitre.bankcomposesample.features.profile_screen.ProfileViewModel
 
 @Composable
-fun ProfileScreen() {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Row(
+fun ProfileScreen(viewModel: ProfileViewModel = hiltViewModel()) {
+    Column() {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize()
         ) {
             ProfileDetail()
         }
@@ -33,8 +38,8 @@ fun ProfileDetail() {
         )
         Column {
             Text(text = "Вячеслав")
-            Text(text = "Пустовалов")
-            Text(text = "+ 7 (914) 378 66 39")
+            Text(text = "Иванов")
+            Text(text = "+ 7 (914) 333 22 11")
         }
     }
 }
