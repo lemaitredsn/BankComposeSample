@@ -1,6 +1,6 @@
 package ru.lemaitre.bankcomposesample.features.notification_screen.domain
 
-import ru.lemaitre.bankcomposesample.features.notification_screen.NotificationModel
+import ru.lemaitre.bankcomposesample.features.notification_screen.domain.model.NotificationModel
 import ru.lemaitre.bankcomposesample.features.notification_screen.data.NotificationRepositoryImp
 import ru.lemaitre.bankcomposesample.features.notification_screen.data.model.NotificationDTO
 import ru.lemaitre.bankcomposesample.features.notification_screen.domain.NotificationMapper.toDomain

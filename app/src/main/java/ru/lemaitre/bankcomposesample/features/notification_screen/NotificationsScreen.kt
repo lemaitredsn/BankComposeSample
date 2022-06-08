@@ -8,22 +8,21 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import ru.lemaitre.bankcomposesample.features.notification_screen.domain.model.NotificationModel
 
 @Composable
-fun NotificationsScreen(viweModel: NotificationViewModel = hiltViewModel()) {
+fun NotificationsScreen(viewModel: NotificationViewModel = hiltViewModel()) {
+    //todo добавить открытие экрана для просмотра деталей
     Column(modifier = Modifier.fillMaxWidth()) {
-        val notification = viweModel.notifications.value
+        val notification = viewModel.notifications.value
         notification.forEach {
             NotificationItem(it)
         }
     }
 }
 
-
-data class NotificationModel(val title: String, val id: Long, val descriptions: String)
 
 @Composable
 fun NotificationItem(notification: NotificationModel) {
