@@ -4,6 +4,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import ru.lemaitre.bankcomposesample.R
 
 @Composable
@@ -32,11 +34,15 @@ fun HeaderProducts(
     Row(verticalAlignment = Alignment.CenterVertically) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(modifier = Modifier.weight(1f)) {
-                Row(modifier = Modifier.clickable {
+                Row(modifier = Modifier
+                    .padding(8.dp)
+                    .clickable {
                     rotate = !rotate
                     rotatedCallback(rotate)
                 }) {
-                    Text(stringResource(id = nameResource))
+                    Text(
+                        stringResource(id = nameResource)
+                    )
                     Icon(
                         painter = painterResource(id = R.drawable.ic_arrow_right),
                         contentDescription = stringResource(id = R.string.main_screen_show_cards),
@@ -44,7 +50,9 @@ fun HeaderProducts(
                     )
                 }
             }
-            Column() {
+            Column(modifier = Modifier
+                .padding(8.dp)
+                .clickable {  }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_add_circle),
                     contentDescription = stringResource(id = R.string.main_screen_add_card)
