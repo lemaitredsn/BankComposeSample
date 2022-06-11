@@ -10,6 +10,7 @@ import dagger.hilt.android.components.ActivityComponent
 import ru.lemaitre.bankcomposesample.common.ui.theme.BankComposeSampleTheme
 import ru.lemaitre.bankcomposesample.features.MainScreenConfiguration
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.new_product.NewProductViewModel
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.notifications_details.NotificationsDetailsViewModel
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.offer_details.OfferDetailViewModel
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.product_details.DetailScreenViewModel
 
@@ -30,5 +31,6 @@ class MainActivity : ComponentActivity() {
         fun detailScreenViewModelFactory(): DetailScreenViewModel.Factory
         fun offerScreenViewModelFactory(): OfferDetailViewModel.Factory
         fun newProductScreenViewModelFactory(): NewProductViewModel.Factory
+        fun notificationsDetailsViewModelFactory(): NotificationsDetailsViewModel.Factory
     }
 }

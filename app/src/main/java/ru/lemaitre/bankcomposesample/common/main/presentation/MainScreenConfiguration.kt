@@ -23,6 +23,8 @@ import ru.lemaitre.bankcomposesample.features.main_screen.presentation.product_d
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.MainScreen
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.new_product.provideNewProductViewModel
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.notifications.NotificationsScreen
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.notifications_details.NotificationsDetailsScreen
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.notifications_details.provideNotificationsDetailsViewModel
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.offer_details.provideOfferDetailViewModel
 import ru.lemaitre.bankcomposesample.features.offer_detail.OfferDetailScreen
 
@@ -77,7 +79,7 @@ fun MainScreenConfiguration() {
             composable(BottomNavigationItemsScreen.Transfers.route) { TransfersScreen(navController) }
             composable(BottomNavigationItemsScreen.Yet.route) { YetScreen(navController) }
             composable(Screens.Profile.name) { ProfileScreen() }
-            composable(Screens.Notifications.name) { NotificationsScreen() }
+            composable(Screens.Notifications.name) { NotificationsScreen(navController) }
             composable(route = Screens.CardDetails.name + "/{product}",
                 arguments = listOf(
                     navArgument("product") {
@@ -122,6 +124,21 @@ fun MainScreenConfiguration() {
                 NewProductScreen(
                     viewModel = provideNewProductViewModel(
                         product = requireNotNull(entry.arguments?.getString("product"))
+                    )
+                )
+            }
+            composable(
+                route = Screens.NotificationDetails.name + "/{notificationId}",
+                arguments = listOf(
+                    navArgument("notificationId") {
+                        type = NavType.StringType
+                        nullable = false
+                    }
+                )
+            ) { entry ->
+                NotificationsDetailsScreen(
+                    viewModel = provideNotificationsDetailsViewModel(
+                        notificationId = requireNotNull(entry.arguments?.getString("notificationId"))
                     )
                 )
             }
