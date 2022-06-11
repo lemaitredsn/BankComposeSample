@@ -7,10 +7,10 @@ import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.components.ActivityComponent
-import ru.lemaitre.bankcomposesample.features.*
+import ru.lemaitre.bankcomposesample.features.MainScreenConfiguration
 import ru.lemaitre.bankcomposesample.features.add_product.presentation.NewProductViewModel
 import ru.lemaitre.bankcomposesample.features.detail_screen.DetailScreenViewModel
-import ru.lemaitre.bankcomposesample.features.offer_detail.OfferDetailViewModel
+import ru.lemaitre.bankcomposesample.features.offer_detail.presentation.OfferDetailViewModel
 import ru.lemaitre.bankcomposesample.ui.theme.BankComposeSampleTheme
 
 @AndroidEntryPoint

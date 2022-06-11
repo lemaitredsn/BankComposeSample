@@ -14,6 +14,7 @@ import ru.lemaitre.bankcomposesample.ui.theme.redA400
 import ru.lemaitre.bankcomposesample.ui.theme.yellow400
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
+import kotlin.random.Random
 
 //Пока тут будет храниться все модели сервера
 
@@ -269,6 +270,11 @@ class Storage @Inject constructor() {
                 "Поступление по карте 1321 3213 3213 0001 + 321р"
             )
         )
+    }
+
+    fun sendOffer(idOffer: String): ResultDTO {
+        val status = if (Random.nextBoolean()) Status.SUCCESS else Status.ERROR
+        return ResultDTO(status)
     }
 
 

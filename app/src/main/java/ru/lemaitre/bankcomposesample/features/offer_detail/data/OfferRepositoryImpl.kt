@@ -1,11 +1,13 @@
 package ru.lemaitre.bankcomposesample.features.offer_detail.data
 
+import kotlinx.coroutines.delay
+import ru.lemaitre.bankcomposesample.common.data.ResultDTO
 import ru.lemaitre.bankcomposesample.common.data.Storage
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.OffersModel
 import ru.lemaitre.bankcomposesample.features.offer_detail.domain.OfferRepository
 import javax.inject.Inject
 
-class OffersRepositoryImpl @Inject constructor(
+class OfferRepositoryImpl @Inject constructor(
     private val storage: Storage
 ): OfferRepository {
 
@@ -15,5 +17,10 @@ class OffersRepositoryImpl @Inject constructor(
 
     override suspend fun getOffer(title: String): OffersModel? {
         return storage.getOffers().find { it.id.toString() == title }
+    }
+
+    override suspend fun selectOffer(idOffer: String): ResultDTO {
+        delay(3000)
+        return storage.sendOffer(idOffer = idOffer)
     }
 }
