@@ -19,12 +19,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.lemaitre.bankcomposesample.R
+import ru.lemaitre.bankcomposesample.common.domain.Products
 
 @Composable
 fun HeaderProducts(
     nameResource: Int,
     startShow: Boolean, //flag
     rotatedCallback: (Boolean) -> Unit,
+    name: String,
+    selected: (String) -> Unit
 
     ) { //fixme
     var rotate by rememberSaveable { mutableStateOf(startShow) }
@@ -52,7 +55,7 @@ fun HeaderProducts(
             }
             Column(modifier = Modifier
                 .padding(8.dp)
-                .clickable {  }) {
+                .clickable { selected(name) }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_add_circle),
                     contentDescription = stringResource(id = R.string.main_screen_add_card)

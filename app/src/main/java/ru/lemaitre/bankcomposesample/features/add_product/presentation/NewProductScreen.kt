@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -22,38 +21,14 @@ import ru.lemaitre.bankcomposesample.features.add_product.domain.model.NewProduc
 
 @OptIn(ExperimentalPagerApi::class, androidx.compose.foundation.ExperimentalFoundationApi::class)
 @Composable
-@Preview
-fun NewProductScreen() {
+fun NewProductScreen(viewModel: NewProductViewModel) {
+    val variants = viewModel.productsVariants
 
     val state = rememberPagerState()
-    HorizontalPager(count = 3, state = state) { page ->
+    HorizontalPager(count = variants.value.size, state = state) { page ->
         when (page) {
-            0 -> {
-                Tab(
-                    NewProductModel(
-                        "Стандарт", "Стандартная карта",
-                        "Рубли", "4 года", "Стандартные условия"
-                    )
-                )
-            }
-            1 -> {
-                Tab(
-                    NewProductModel(
-                        "Доллар", "Если нужны доллары",
-                        "доллар", "евро", "4 года"
-                    )
-                )
-            }
-            2 -> {
-                Tab(
-                    NewProductModel(
-                        "Евро", "Евро для поездок в Европу",
-                        "евро", "4 года", "Лучшие"
-                    )
-                )
-            }
+            page -> Tab(variants.value[page])
         }
-
     }
 
     DotsIndicator(

@@ -9,4 +9,5 @@ sealed class Screens(
     object Notifications : Screens("Notifications")
     object CardDetails : Screens("Card")
     object OfferDetail: Screens("OfferDetail")
+    object NewProduct: Screens("NewProduct")
 }

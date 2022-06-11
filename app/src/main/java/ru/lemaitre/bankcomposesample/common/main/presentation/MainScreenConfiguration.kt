@@ -16,6 +16,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import ru.lemaitre.bankcomposesample.common.main.domain.model.BottomNavigationItemsScreen
 import ru.lemaitre.bankcomposesample.common.main.domain.model.Screens
+import ru.lemaitre.bankcomposesample.features.add_product.presentation.NewProductScreen
+import ru.lemaitre.bankcomposesample.features.add_product.presentation.provideNewProductViewModel
 import ru.lemaitre.bankcomposesample.features.detail_screen.DetailScreen
 import ru.lemaitre.bankcomposesample.features.detail_screen.provideDetailScreenViewModel
 import ru.lemaitre.bankcomposesample.features.main.AppBottomNavigation
@@ -105,6 +107,21 @@ fun MainScreenConfiguration() {
                     viewModel = provideOfferDetailViewModel(
                         entry.arguments?.getString("offerId")
                             ?: throw IllegalArgumentException("Offer detail screen: offer id not be null")
+                    )
+                )
+            }
+            composable(
+                route = Screens.NewProduct.name + "/{product}",
+                arguments = listOf(
+                    navArgument("product") {
+                        type = NavType.StringType
+                        nullable = false
+                    }
+                )
+            ) { entry ->
+                NewProductScreen(
+                    viewModel = provideNewProductViewModel(
+                        product = requireNotNull(entry.arguments?.getString("product"))
                     )
                 )
             }

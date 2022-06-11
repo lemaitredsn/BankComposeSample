@@ -76,7 +76,7 @@ fun MainScreen(
                     modifier = Modifier
                         .horizontalScroll(state = horizontalScrollState)
                 ) {
-                    viewModel.offersModel.value.forEach { offer->
+                    viewModel.offersModel.value.forEach { offer ->
                         OffersItemView(
                             offersModel = offer
                         ) {
@@ -95,6 +95,13 @@ fun MainScreen(
                     CardProductModel::class.java -> R.string.main_screen_cards
                     else -> throw IllegalArgumentException("class not find for resource name")
                 }
+
+                val nameProduct = when (group.key) {
+                    AccountProductModel::class.java -> "account"
+                    CardProductModel::class.java -> "card"
+                    else -> throw IllegalArgumentException("class not find for resource name")
+                }
+
                 val rotateCallback = getRotateByType(group.key, viewModel)
 
                 val visibleField = when (group.key) {
@@ -106,8 +113,11 @@ fun MainScreen(
                     HeaderProducts(
                         nameResource = nameResource,
                         startShow = true,
-                        rotatedCallback = rotateCallback
-                    )
+                        rotatedCallback = rotateCallback,
+                        name = nameProduct,
+                    ) {
+                        navController.navigate(Screens.NewProduct.name + "/${nameProduct}")
+                    }
                 }
                 items(1) {
                     group.value.forEach { product ->

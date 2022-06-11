@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.components.ActivityComponent
 import ru.lemaitre.bankcomposesample.features.*
+import ru.lemaitre.bankcomposesample.features.add_product.presentation.NewProductViewModel
 import ru.lemaitre.bankcomposesample.features.detail_screen.DetailScreenViewModel
 import ru.lemaitre.bankcomposesample.features.offer_detail.OfferDetailViewModel
 import ru.lemaitre.bankcomposesample.ui.theme.BankComposeSampleTheme
@@ -28,6 +29,7 @@ class MainActivity : ComponentActivity() {
     interface ViewModelFactoryProvider {
         fun detailScreenViewModelFactory(): DetailScreenViewModel.Factory
         fun offerScreenViewModelFactory(): OfferDetailViewModel.Factory
+        fun newProductScreenViewModelFactory(): NewProductViewModel.Factory
     }
 
 
