@@ -50,7 +50,7 @@ class MainScreenViewModel @Inject constructor(
 
     private fun getOffers() {
         viewModelScope.launch {
-            delay(1000)
+            delay(3000)
             _offers.value = interactor.getOffers()
         }
     }

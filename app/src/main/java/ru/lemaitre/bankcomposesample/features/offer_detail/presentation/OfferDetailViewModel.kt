@@ -3,6 +3,7 @@ package ru.lemaitre.bankcomposesample.features.offer_detail.presentation
 import android.app.Activity
 import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
@@ -16,7 +17,8 @@ import dagger.assisted.AssistedInject
 import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.launch
 import ru.lemaitre.bankcomposesample.common.main.MainActivity
-import ru.lemaitre.bankcomposesample.features.detail_screen.DetailScreenViewModel
+import ru.lemaitre.bankcomposesample.common.mappers.MapperUI.toUI
+import ru.lemaitre.bankcomposesample.common.ui.models.ResultUI
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.OffersModel
 import ru.lemaitre.bankcomposesample.features.offer_detail.domain.OfferUseCase
 import ru.lemaitre.bankcomposesample.features.offer_detail.domain.SelectOfferUseCase
@@ -33,14 +35,14 @@ class OfferDetailViewModel @AssistedInject constructor(
     private val _loading = mutableStateOf(false)
     val loading: State<Boolean> = _loading
 
-    private val _result = mutableStateOf("")
-    val result: State<String> = _result
+    private val _result: MutableState<ResultUI?> = mutableStateOf(null)
+    val result: State<ResultUI?> = _result
 
     init {
         getOffer()
     }
 
-    fun getOffer(){
+    private fun getOffer(){
         viewModelScope.launch {
             Log.e("TAG", "offerId $offerId")
             _offer.value = offerUseCase(offerId)
@@ -50,14 +52,13 @@ class OfferDetailViewModel @AssistedInject constructor(
     fun wantToGetClicked() {
         viewModelScope.launch {
             _loading.value = true
-            val result = selectOfferUseCase(offerId)
-            _result.value = result.status.name
+            _result.value = selectOfferUseCase(offerId).toUI()
             _loading.value = false
         }
     }
 
     fun closeDialog(){
-        _result.value = ""
+        _result.value = null
     }
 
     @AssistedFactory

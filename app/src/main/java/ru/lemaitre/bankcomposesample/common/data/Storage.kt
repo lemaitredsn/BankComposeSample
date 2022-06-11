@@ -8,10 +8,10 @@ import ru.lemaitre.bankcomposesample.features.detail_screen.domain.HistoryItem
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.OffersModel
 import ru.lemaitre.bankcomposesample.features.notification_screen.data.model.NotificationDTO
 import ru.lemaitre.bankcomposesample.features.profile_screen.data.ProfileDTO
-import ru.lemaitre.bankcomposesample.ui.theme.Purple700
-import ru.lemaitre.bankcomposesample.ui.theme.orange400
-import ru.lemaitre.bankcomposesample.ui.theme.redA400
-import ru.lemaitre.bankcomposesample.ui.theme.yellow400
+import ru.lemaitre.bankcomposesample.common.ui.theme.Purple700
+import ru.lemaitre.bankcomposesample.common.ui.theme.orange400
+import ru.lemaitre.bankcomposesample.common.ui.theme.redA400
+import ru.lemaitre.bankcomposesample.common.ui.theme.yellow400
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
 import kotlin.random.Random
@@ -273,8 +273,19 @@ class Storage @Inject constructor() {
     }
 
     fun sendOffer(idOffer: String): ResultDTO {
-        val status = if (Random.nextBoolean()) Status.SUCCESS else Status.ERROR
-        return ResultDTO(status)
+        var status = ""
+        var message = ""
+        if (Random.nextBoolean()) {
+            status = "Успех"
+            message = "Заявка отправлена"
+        } else {
+            status = "Ошибка"
+            message = "При отправке произошла ошибка"
+        }
+        return ResultDTO(
+            status = status,
+            message = message
+        )
     }
 
 

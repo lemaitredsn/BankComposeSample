@@ -3,7 +3,7 @@ package ru.lemaitre.bankcomposesample.features.main_screen.domain
 import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.Color
 import ru.lemaitre.bankcomposesample.R
-import ru.lemaitre.bankcomposesample.ui.theme.blueA400
+import ru.lemaitre.bankcomposesample.common.ui.theme.blueA400
 
 data class OffersModel(
     val id: Long = 0,

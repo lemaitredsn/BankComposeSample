@@ -3,16 +3,16 @@ package ru.lemaitre.bankcomposesample.features.offer_detail
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -68,13 +68,31 @@ fun OfferDetailScreen(viewModel: OfferDetailViewModel) {
             }
         }
 
-        if (viewModel.result.value.isNotEmpty()) {
+        val result = viewModel.result.value
+        if (result != null) {
             AlertDialog(
                 onDismissRequest = { viewModel.closeDialog() },
-                title = { Text(text = viewModel.result.value) },
+                title = null,
+                text = null,
                 buttons = {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Image(
+                            painter = painterResource(id = result.icon),
+                            contentDescription = result.status,
+                            modifier = Modifier
+                                .padding(top = 35.dp)
+                                .height(70.dp)
+                                .fillMaxWidth()
+                        )
+                        Text(
+                            result.status, fontSize = 24.sp,
+                            fontWeight = FontWeight(800)
+                        )
+                        Text(result.message, fontSize = 14.sp)
+                    }
                     Button(
-                        onClick = { viewModel.closeDialog() }
+                        onClick = { viewModel.closeDialog() },
+                        modifier = Modifier.fillMaxWidth().padding(top = 35.dp)
                     ) {
                         Text("OK", fontSize = 22.sp)
                     }

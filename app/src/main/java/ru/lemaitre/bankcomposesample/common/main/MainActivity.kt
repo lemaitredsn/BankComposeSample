@@ -11,7 +11,7 @@ import ru.lemaitre.bankcomposesample.features.MainScreenConfiguration
 import ru.lemaitre.bankcomposesample.features.add_product.presentation.NewProductViewModel
 import ru.lemaitre.bankcomposesample.features.detail_screen.DetailScreenViewModel
 import ru.lemaitre.bankcomposesample.features.offer_detail.presentation.OfferDetailViewModel
-import ru.lemaitre.bankcomposesample.ui.theme.BankComposeSampleTheme
+import ru.lemaitre.bankcomposesample.common.ui.theme.BankComposeSampleTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

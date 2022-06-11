@@ -1,9 +1,6 @@
 package ru.lemaitre.bankcomposesample.common.data
 
 data class ResultDTO(
-    val status: Status
+    val status: String = "",
+    val message: String = ""
 )
-
-enum class Status{
-    SUCCESS, ERROR
-}

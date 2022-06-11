@@ -1,4 +1,4 @@
-package ru.lemaitre.bankcomposesample.ui.theme
+package ru.lemaitre.bankcomposesample.common.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

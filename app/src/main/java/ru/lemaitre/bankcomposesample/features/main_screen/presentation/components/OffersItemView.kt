@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.OffersModel
-import ru.lemaitre.bankcomposesample.ui.theme.GrayAlpha54
+import ru.lemaitre.bankcomposesample.common.ui.theme.GrayAlpha54
 
 @Composable
 fun OffersItemView(

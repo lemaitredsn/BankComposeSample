@@ -1,4 +1,4 @@
-package ru.lemaitre.bankcomposesample.ui.theme
+package ru.lemaitre.bankcomposesample.common.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

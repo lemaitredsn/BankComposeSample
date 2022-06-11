@@ -17,9 +17,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.lemaitre.bankcomposesample.R
 import ru.lemaitre.bankcomposesample.common.domain.*
-import ru.lemaitre.bankcomposesample.ui.theme.GrayAlpha54
-import ru.lemaitre.bankcomposesample.ui.theme.blueA400
-import ru.lemaitre.bankcomposesample.ui.theme.yellow400
+import ru.lemaitre.bankcomposesample.common.ui.theme.GrayAlpha54
+import ru.lemaitre.bankcomposesample.common.ui.theme.blueA400
+import ru.lemaitre.bankcomposesample.common.ui.theme.yellow400
 
 @Composable
 fun Prod(
