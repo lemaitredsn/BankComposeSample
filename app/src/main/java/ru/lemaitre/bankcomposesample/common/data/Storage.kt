@@ -3,11 +3,11 @@ package ru.lemaitre.bankcomposesample.common.data
 import android.util.Log
 import ru.lemaitre.bankcomposesample.R
 import ru.lemaitre.bankcomposesample.common.domain.*
-import ru.lemaitre.bankcomposesample.features.detail_screen.domain.DetailModel
-import ru.lemaitre.bankcomposesample.features.detail_screen.domain.HistoryItem
-import ru.lemaitre.bankcomposesample.features.main_screen.domain.OffersModel
-import ru.lemaitre.bankcomposesample.features.notification_screen.data.model.NotificationDTO
-import ru.lemaitre.bankcomposesample.features.profile_screen.data.ProfileDTO
+import ru.lemaitre.bankcomposesample.features.main_screen.domain.models.DetailModel
+import ru.lemaitre.bankcomposesample.features.main_screen.domain.models.HistoryItem
+import ru.lemaitre.bankcomposesample.features.main_screen.domain.models.OffersModel
+import ru.lemaitre.bankcomposesample.features.main_screen.data.models.NotificationDTO
+import ru.lemaitre.bankcomposesample.features.main_screen.data.models.ProfileDTO
 import ru.lemaitre.bankcomposesample.common.ui.theme.Purple700
 import ru.lemaitre.bankcomposesample.common.ui.theme.orange400
 import ru.lemaitre.bankcomposesample.common.ui.theme.redA400

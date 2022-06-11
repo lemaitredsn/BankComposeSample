@@ -7,11 +7,11 @@ import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.components.ActivityComponent
-import ru.lemaitre.bankcomposesample.features.MainScreenConfiguration
-import ru.lemaitre.bankcomposesample.features.add_product.presentation.NewProductViewModel
-import ru.lemaitre.bankcomposesample.features.detail_screen.DetailScreenViewModel
-import ru.lemaitre.bankcomposesample.features.offer_detail.presentation.OfferDetailViewModel
 import ru.lemaitre.bankcomposesample.common.ui.theme.BankComposeSampleTheme
+import ru.lemaitre.bankcomposesample.features.MainScreenConfiguration
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.new_product.NewProductViewModel
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.offer_details.OfferDetailViewModel
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.product_details.DetailScreenViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -31,6 +31,4 @@ class MainActivity : ComponentActivity() {
         fun offerScreenViewModelFactory(): OfferDetailViewModel.Factory
         fun newProductScreenViewModelFactory(): NewProductViewModel.Factory
     }
-
-
 }

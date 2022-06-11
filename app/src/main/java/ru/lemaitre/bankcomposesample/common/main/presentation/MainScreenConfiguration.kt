@@ -17,14 +17,14 @@ import androidx.navigation.navArgument
 import ru.lemaitre.bankcomposesample.common.main.domain.model.BottomNavigationItemsScreen
 import ru.lemaitre.bankcomposesample.common.main.domain.model.Screens
 import ru.lemaitre.bankcomposesample.features.add_product.presentation.NewProductScreen
-import ru.lemaitre.bankcomposesample.features.add_product.presentation.provideNewProductViewModel
-import ru.lemaitre.bankcomposesample.features.detail_screen.DetailScreen
-import ru.lemaitre.bankcomposesample.features.detail_screen.provideDetailScreenViewModel
 import ru.lemaitre.bankcomposesample.features.main.AppBottomNavigation
-import ru.lemaitre.bankcomposesample.features.main_screen.presentation.MainScreen
-import ru.lemaitre.bankcomposesample.features.notification_screen.NotificationsScreen
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.product_details.DetailScreen
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.product_details.provideDetailScreenViewModel
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.MainScreen
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.new_product.provideNewProductViewModel
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.notifications.NotificationsScreen
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.offer_details.provideOfferDetailViewModel
 import ru.lemaitre.bankcomposesample.features.offer_detail.OfferDetailScreen
-import ru.lemaitre.bankcomposesample.features.offer_detail.presentation.provideOfferDetailViewModel
 
 @Preview
 @Composable

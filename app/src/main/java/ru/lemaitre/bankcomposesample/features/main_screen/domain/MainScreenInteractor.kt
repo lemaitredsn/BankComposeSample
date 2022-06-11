@@ -1,11 +1,12 @@
 package ru.lemaitre.bankcomposesample.features.main_screen.domain
 
-import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import ru.lemaitre.bankcomposesample.common.domain.*
+import ru.lemaitre.bankcomposesample.features.main_screen.domain.repositories.MainScreenRepository
 import javax.inject.Inject
 
+// FIXME: Исправить на usecases
 class MainScreenInteractor @Inject constructor(
     private val repository: MainScreenRepository
 ) {
