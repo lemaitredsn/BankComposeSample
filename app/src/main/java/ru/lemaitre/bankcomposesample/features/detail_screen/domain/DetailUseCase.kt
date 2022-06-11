@@ -7,7 +7,7 @@ import ru.lemaitre.bankcomposesample.features.detail_screen.data.DetailRepositor
 import javax.inject.Inject
 
 class DetailUseCase @Inject constructor(
-    private val detailRepository: DetailRepositoryImpl
+    private val detailRepository: DetailRepository
 ) {
     fun getDetails(number: String): Flow<StateData<DetailModel>> = flow {
         try {

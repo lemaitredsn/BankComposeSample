@@ -3,13 +3,14 @@ package ru.lemaitre.bankcomposesample.features.detail_screen.di
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
+import ru.lemaitre.bankcomposesample.common.data.Storage
 import ru.lemaitre.bankcomposesample.features.detail_screen.data.DetailRepositoryImpl
 import ru.lemaitre.bankcomposesample.features.detail_screen.domain.DetailRepository
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 class DetailScreenComponent {
     @Provides
-    fun getDetailRepository(repositoryImpl: DetailRepositoryImpl): DetailRepository = repositoryImpl
+    fun providesDetailRepository(storage: Storage):DetailRepository = DetailRepositoryImpl(storage)
 }
