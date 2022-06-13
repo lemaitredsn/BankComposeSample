@@ -2,11 +2,12 @@ package ru.lemaitre.bankcomposesample.features.main
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.Image
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -23,7 +24,7 @@ internal fun AppBottomNavigation(
         BottomNavigation() {
             items.forEach { screen ->
                 BottomNavigationItem(
-                    icon = { Icon(imageVector = screen.icon, contentDescription = screen.route) },
+                    icon = { Image(painter = painterResource(id = screen.icon), contentDescription = screen.route) },
                     label = { Text(stringResource(id = screen.resourceId)) },
                     alwaysShowLabel = false,
                     onClick = {

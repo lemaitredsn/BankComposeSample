@@ -1,5 +1,6 @@
 package ru.lemaitre.bankcomposesample.common.main.domain.model
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -11,9 +12,9 @@ import ru.lemaitre.bankcomposesample.R
 sealed class BottomNavigationItemsScreen(
     val route: String,
     @StringRes val resourceId: Int,
-    val icon: ImageVector
+    @DrawableRes val icon: Int
 ) {
-    object Main : BottomNavigationItemsScreen("Главный", R.string.main, Icons.Filled.DateRange)
-    object Transfers : BottomNavigationItemsScreen("Переводы", R.string.transfers, Icons.Filled.ArrowDropDown)
-    object Yet : BottomNavigationItemsScreen("Еще", R.string.yet, Icons.Filled.Check)
+    object Main : BottomNavigationItemsScreen("Главный", R.string.main, R.drawable.ic_star)
+    object Transfers : BottomNavigationItemsScreen("Переводы", R.string.transfers, R.drawable.ic_money)
+    object Yet : BottomNavigationItemsScreen("Еще", R.string.yet, R.drawable.ic_settings)
 }
