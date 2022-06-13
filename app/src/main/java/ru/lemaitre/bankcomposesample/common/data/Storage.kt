@@ -12,6 +12,8 @@ import ru.lemaitre.bankcomposesample.common.ui.theme.Purple700
 import ru.lemaitre.bankcomposesample.common.ui.theme.orange400
 import ru.lemaitre.bankcomposesample.common.ui.theme.redA400
 import ru.lemaitre.bankcomposesample.common.ui.theme.yellow400
+import ru.lemaitre.bankcomposesample.features.main_screen.data.models.NewProductsDTO
+import ru.lemaitre.bankcomposesample.features.main_screen.domain.models.NewProductModel
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
 import kotlin.random.Random
@@ -279,6 +281,58 @@ class Storage @Inject constructor() {
     }
 
     fun sendOffer(idOffer: String): ResultDTO {
+        return getRandomResultDTO()
+    }
+
+    fun getNewProducts(productName: String): List<NewProductsDTO> {
+        return when (productName) {
+            "card" ->
+                listOf(
+                    NewProductsDTO(
+                        "Стандарт", "Стандартная карта",
+                        "Рубли", "4 года", "Стандартные условия"
+                    ),
+                    NewProductsDTO(
+                        "Доллар", "Если нужны доллары",
+                        "доллар", "евро", "4 года"
+                    ),
+                    NewProductsDTO(
+                        "Евро", "Евро для поездок в Европу",
+                        "евро", "4 года", "Лучшие"
+                    )
+                )
+            "account" -> listOf(
+                NewProductsDTO(
+                    "Транспорт стандарт",
+                    "Транспорт стандарт - стандартный счет для отправки денежных средств",
+                    "Рубли",
+                    "Бессрочный",
+                    "0 рублей - за открытие, 0 - обслуживание"
+                ),
+                NewProductsDTO(
+                    "Транспорт валюта", "Транспорт валютный",
+                    "Евро, доллар, юань", "бессроочный", "0.01% - за перевод"
+                ),
+                NewProductsDTO(
+                    "Кэшбек",
+                    "Счет для получении максимальной выгоды",
+                    "Рубли",
+                    "4 года",
+                    "Делайте 10 покупок на сумму более 10 000р. для получения 10% кэшбека"
+                ),
+                NewProductsDTO(
+                    "Пятерка", "Супер счет пятерка",
+                    "Рубли", "Бессрочный", "Кэшбек на остаток 5%, кэшбек на покупку - 5%"
+                )
+            )
+            else -> error("unknown product name")
+        }
+    }
+
+    private fun getRandomResultDTO(
+        success: String = "Заявка отправлена",
+        error: String = "При отправке произошла ошибка"
+    ): ResultDTO {
         var status = ""
         var message = ""
         if (Random.nextBoolean()) {
@@ -294,5 +348,8 @@ class Storage @Inject constructor() {
         )
     }
 
+    fun sendOrderedProduct(name: String): ResultDTO {
+        return getRandomResultDTO()
+    }
 
 }

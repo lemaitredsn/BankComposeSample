@@ -27,7 +27,7 @@ class OfferDetailViewModel @AssistedInject constructor(
     @Assisted private val offerId: String,
     private val offerUseCase: OfferUseCase,
     private val selectOfferUseCase: SelectOfferUseCase
-): ViewModel() {
+) : ViewModel() {
 
     private val _offer = mutableStateOf(OffersModel())
     val offer: State<OffersModel> = _offer
@@ -42,7 +42,7 @@ class OfferDetailViewModel @AssistedInject constructor(
         getOffer()
     }
 
-    private fun getOffer(){
+    private fun getOffer() {
         viewModelScope.launch {
             Log.e("TAG", "offerId $offerId")
             _offer.value = offerUseCase(offerId)
@@ -57,7 +57,7 @@ class OfferDetailViewModel @AssistedInject constructor(
         }
     }
 
-    fun closeDialog(){
+    fun closeDialog() {
         _result.value = null
     }
 

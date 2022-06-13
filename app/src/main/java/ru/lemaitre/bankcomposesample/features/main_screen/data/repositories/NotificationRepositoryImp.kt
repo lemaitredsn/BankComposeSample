@@ -1,5 +1,5 @@
 
-package ru.lemaitre.bankcomposesample.features.main_screen.data.Repositories
+package ru.lemaitre.bankcomposesample.features.main_screen.data.repositories
 
 import ru.lemaitre.bankcomposesample.common.data.Storage
 import ru.lemaitre.bankcomposesample.features.main_screen.data.models.NotificationDTO

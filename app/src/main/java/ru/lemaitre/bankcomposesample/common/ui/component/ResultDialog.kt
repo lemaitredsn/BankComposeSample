@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import ru.lemaitre.bankcomposesample.common.ui.models.ResultUI
 
 @Composable
-fun AlertResult(
+fun ResultDialog(
     result: ResultUI,
     onDismiss: (() -> Unit),
     onSuccessCallback: () -> Unit

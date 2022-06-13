@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.lemaitre.bankcomposesample.common.data.Storage
-import ru.lemaitre.bankcomposesample.features.main_screen.data.Repositories.NotificationRepositoryImp
+import ru.lemaitre.bankcomposesample.features.main_screen.data.repositories.NotificationRepositoryImp
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.repositories.NotificationRepository
 
 @Module

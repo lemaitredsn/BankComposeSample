@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import ru.lemaitre.bankcomposesample.common.ui.component.ProgressBar
+import ru.lemaitre.bankcomposesample.common.ui.component.ResultDialog
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.models.NewProductModel
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.new_product.NewProductViewModel
 
@@ -25,23 +27,40 @@ import ru.lemaitre.bankcomposesample.features.main_screen.presentation.new_produ
 fun NewProductScreen(viewModel: NewProductViewModel) {
     val variants = viewModel.productsVariants
 
-    val state = rememberPagerState()
-    HorizontalPager(count = variants.value.size, state = state) { page ->
-        when (page) {
-            page -> Tab(variants.value[page])
+    if (viewModel.loading.value) {
+        ProgressBar()
+    } else {
+
+
+        val state = rememberPagerState()
+        HorizontalPager(count = variants.value.size, state = state) { page ->
+            when (page) {
+                page -> Tab(variants.value[page]) {
+                    viewModel.orderClicked(it)
+                }
+            }
         }
+
+        DotsIndicator(
+            totalDots = variants.value.size,
+            selectedIndex = state.currentPage,
+            selectedColor = Color.Blue,
+            unSelectedColor = Color.DarkGray
+        )
     }
 
-    DotsIndicator(
-        totalDots = 3,
-        selectedIndex = state.currentPage,
-        selectedColor = Color.Blue,
-        unSelectedColor = Color.DarkGray
-    )
+    val result = viewModel.result.value
+    if (result != null) {
+        ResultDialog(
+            result = result,
+            onDismiss = { viewModel.closeDialog() },
+            onSuccessCallback = { viewModel.closeDialog() }
+        )
+    }
 }
 
 @Composable
-fun Tab(newProductModel: NewProductModel) {
+fun Tab(newProductModel: NewProductModel, send: (String) -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(top = 20.dp)
@@ -71,7 +90,7 @@ fun Tab(newProductModel: NewProductModel) {
                     Text(text = newProductModel.description, fontSize = 24.sp)
                 }
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = { send(newProductModel.name) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
