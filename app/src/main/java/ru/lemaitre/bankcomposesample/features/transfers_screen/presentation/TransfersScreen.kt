@@ -1,30 +1,25 @@
-package ru.lemaitre.bankcomposesample.features
+package ru.lemaitre.bankcomposesample.features.transfers_screen.presentation
 
-import androidx.activity.compose.BackHandler
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import ru.lemaitre.bankcomposesample.R
-import ru.lemaitre.bankcomposesample.common.main.domain.model.BottomNavigationItemsScreen
+import ru.lemaitre.bankcomposesample.features.transfers_screen.presentation.models.AutoTransfersUI
 
 //Переводы
 @Composable
-fun TransfersScreen(navController: NavController) {
+fun TransfersScreen(navController: NavController, viewModel: TransfersViewModel = hiltViewModel()) {
     val horizontalScrollState = rememberScrollState()
 
     Scaffold(
@@ -73,34 +68,9 @@ fun TransfersScreen(navController: NavController) {
                 modifier = Modifier
                     .horizontalScroll(state = horizontalScrollState)
             ) {
-                val listAutoTransfer = listOf(
-                    AutoTransfer(
-                        R.drawable.qr_code_scanner_black_24dp,
-                        "Создать шаблон"
-                    ),
-                    AutoTransfer(
-                        R.drawable.mir_icon,
-                        "Оплатить по QR"
-                    ),
-                    AutoTransfer(
-                        R.drawable.ic_card,
-                        "Капремонт"
-                    ),
-                    AutoTransfer(
-                        R.drawable.ic_menu,
-                        "Оплата телефона"
-                    ),
-                    AutoTransfer(
-                        R.drawable.ic_menu,
-                        "Газ"
-                    ),
-                    AutoTransfer(
-                        R.drawable.ic_menu,
-                        "Оплата воды"
-                    )
-                )
+                val listAutoTransfer = viewModel.autoTransfers.value
                 listAutoTransfer.forEach {
-                    AutoTransfers(autoTransfer = it)
+                    AutoTransfers(autoTransferModel = it)
                 }
             }
             Row(modifier = Modifier.padding(start = 16.dp, top = 16.dp)) {
@@ -194,14 +164,9 @@ fun Transfers(transfer: TransferItem) {
     }
 }
 
-data class AutoTransfer(
-    @DrawableRes val icon: Int,
-    val title: String
-)
-
 @Composable
 fun AutoTransfers(
-    autoTransfer: AutoTransfer
+    autoTransferModel: AutoTransfersUI
 ) {
     Card(
         modifier = Modifier
@@ -211,16 +176,16 @@ fun AutoTransfers(
     ) {
         Column(modifier = Modifier.padding(8.dp)) {
             Row {
-                Icon(
-                    painter = painterResource(id = autoTransfer.icon),
-                    contentDescription = autoTransfer.title,
+                Image(
+                    painter = painterResource(id = autoTransferModel.icon),
+                    contentDescription = autoTransferModel.name,
                     modifier = Modifier
                         .width(30.dp)
                         .height(30.dp)
                 )
             }
             Row {
-                Text(text = autoTransfer.title)
+                Text(text = autoTransferModel.name)
             }
         }
     }

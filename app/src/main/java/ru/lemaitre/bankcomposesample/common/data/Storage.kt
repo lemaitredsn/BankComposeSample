@@ -2,19 +2,18 @@ package ru.lemaitre.bankcomposesample.common.data
 
 import android.util.Log
 import ru.lemaitre.bankcomposesample.R
+import ru.lemaitre.bankcomposesample.common.data.models.AutoTransferDTO
 import ru.lemaitre.bankcomposesample.common.domain.*
-import ru.lemaitre.bankcomposesample.features.main_screen.domain.models.DetailModel
-import ru.lemaitre.bankcomposesample.features.main_screen.domain.models.HistoryItem
-import ru.lemaitre.bankcomposesample.features.main_screen.domain.models.OffersModel
-import ru.lemaitre.bankcomposesample.features.main_screen.data.models.NotificationDTO
-import ru.lemaitre.bankcomposesample.features.main_screen.data.models.ProfileDTO
 import ru.lemaitre.bankcomposesample.common.ui.theme.Purple700
 import ru.lemaitre.bankcomposesample.common.ui.theme.orange400
 import ru.lemaitre.bankcomposesample.common.ui.theme.redA400
 import ru.lemaitre.bankcomposesample.common.ui.theme.yellow400
 import ru.lemaitre.bankcomposesample.features.main_screen.data.models.NewProductsDTO
-import ru.lemaitre.bankcomposesample.features.main_screen.domain.models.NewProductModel
-import java.lang.IllegalArgumentException
+import ru.lemaitre.bankcomposesample.features.main_screen.data.models.NotificationDTO
+import ru.lemaitre.bankcomposesample.features.main_screen.data.models.ProfileDTO
+import ru.lemaitre.bankcomposesample.features.main_screen.domain.models.DetailModel
+import ru.lemaitre.bankcomposesample.features.main_screen.domain.models.HistoryItem
+import ru.lemaitre.bankcomposesample.features.main_screen.domain.models.OffersModel
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -23,7 +22,7 @@ import kotlin.random.Random
 class Storage @Inject constructor() {
 
     fun getCardProduct(): List<CardProductModel> {
-        return /*emptyList<CardProductModel>()*/ listOf(
+        return /*emptyList<CardProductModel>()*/ listOf( //FIXME this is UI model
             CardProductModel(
                 number = "1321 3213 3213 0001",
                 typeCard = TypeCard.CREDIT,
@@ -73,7 +72,7 @@ class Storage @Inject constructor() {
         )
     }
 
-    suspend fun getOffers(): List<OffersModel> {
+    suspend fun getOffers(): List<OffersModel> { //FIXME UI MOdel
         return listOf(
             OffersModel(
                 id = 1,
@@ -104,7 +103,7 @@ class Storage @Inject constructor() {
 
     fun getAccountProducts(): List<AccountProductModel> {
         return listOf(
-            AccountProductModel(
+            AccountProductModel( //FIXME UI model
                 typeAccount = TypeAccount.CURRENT,
                 userNameAccount = "Текущий",
                 number = "4258 1223 1365 1236 0001",
@@ -350,6 +349,31 @@ class Storage @Inject constructor() {
 
     fun sendOrderedProduct(name: String): ResultDTO {
         return getRandomResultDTO()
+    }
+
+    fun getAutoTransfers(): List<AutoTransferDTO> {
+        return listOf(
+            AutoTransferDTO(
+                "Оплатить по QR",
+                1
+            ),
+            AutoTransferDTO(
+                "Капремонт",
+                2
+            ),
+            AutoTransferDTO(
+                "Оплата телефона",
+                3
+            ),
+            AutoTransferDTO(
+                "Газ",
+                4
+            ),
+            AutoTransferDTO(
+                "Оплата воды",
+                5
+            )
+        )
     }
 
 }

@@ -27,6 +27,7 @@ import ru.lemaitre.bankcomposesample.features.main_screen.presentation.notificat
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.notifications_details.provideNotificationsDetailsViewModel
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.offer_details.provideOfferDetailViewModel
 import ru.lemaitre.bankcomposesample.features.offer_detail.OfferDetailScreen
+import ru.lemaitre.bankcomposesample.features.transfers_screen.presentation.TransfersScreen
 
 @Preview
 @Composable

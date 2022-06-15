@@ -1,6 +1,5 @@
 package ru.lemaitre.bankcomposesample.features
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -10,14 +9,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import ru.lemaitre.bankcomposesample.R
-import ru.lemaitre.bankcomposesample.common.main.domain.model.BottomNavigationItemsScreen
+import ru.lemaitre.bankcomposesample.features.transfers_screen.presentation.TransferItem
+import ru.lemaitre.bankcomposesample.features.transfers_screen.presentation.Transfers
 
 //Еще
 @Composable
