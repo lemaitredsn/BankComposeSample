@@ -5,14 +5,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import ru.lemaitre.bankcomposesample.common.domain.OfferState
 import ru.lemaitre.bankcomposesample.common.domain.ProductState
 import ru.lemaitre.bankcomposesample.common.domain.StateData
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.MainScreenInteractor
-import ru.lemaitre.bankcomposesample.features.main_screen.domain.models.OffersModel
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,8 +22,8 @@ class MainScreenViewModel @Inject constructor(
     private val _userName = mutableStateOf<String>("")
     val userName: State<String> = _userName
 
-    private val _offers = mutableStateOf<List<OffersModel>>(emptyList())
-    val offersModel: State<List<OffersModel>> = _offers
+    private val _offers = mutableStateOf(OfferState())
+    val offersModel: State<OfferState> = _offers
 
     var isShowCard = mutableStateOf<Boolean>(true)// todo get from shared prefs
     var isShowAccount = mutableStateOf<Boolean>(true)
@@ -49,10 +48,15 @@ class MainScreenViewModel @Inject constructor(
     }
 
     private fun getOffers() {
-        viewModelScope.launch {
-            delay(3000)
-            _offers.value = interactor.getOffers()
-        }
+        interactor.getOffers().onEach { result ->
+            when (result) {
+                is StateData.Success -> _offers.value =
+                    OfferState(offers = result.data ?: emptyList())
+                is StateData.Error -> _offers.value =
+                    OfferState(error = result.message ?: "Ошибка получения предложений")
+                is StateData.Loading -> _offers.value = OfferState(isLoading = true)
+            }
+        }.launchIn(viewModelScope)
     }
 
     fun commonProducts() {

@@ -4,16 +4,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -25,9 +25,13 @@ import ru.lemaitre.bankcomposesample.common.domain.AccountProductModel
 import ru.lemaitre.bankcomposesample.common.domain.CardProductModel
 import ru.lemaitre.bankcomposesample.common.domain.Products
 import ru.lemaitre.bankcomposesample.common.main.domain.model.Screens
+import ru.lemaitre.bankcomposesample.common.ui.component.ProgressBar
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.OffersItemView
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.Prod
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.components.HeaderProducts
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.components.OffersError
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.components.OffersLoading
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.components.OffersMainScreen
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -74,18 +78,11 @@ fun MainScreen(
             //offers
             item {
                 val horizontalScrollState = rememberScrollState()
-                Row(
-                    modifier = Modifier
-                        .horizontalScroll(state = horizontalScrollState)
-                ) {
-                    viewModel.offersModel.value.forEach { offer ->
-                        OffersItemView(
-                            offersModel = offer
-                        ) {
-                            navController.navigate(Screens.OfferDetail.name + "/${offer.id}")
-                        }
-                    }
-                }
+                OffersMainScreen(
+                    horizontalScrollState = horizontalScrollState,
+                    viewModel = viewModel,
+                    navController = navController
+                )
             }
             //products
             viewModel.commonProducts.value.products.groupBy {

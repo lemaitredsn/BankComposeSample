@@ -35,6 +35,7 @@ fun OffersItemView(
         modifier = Modifier
             .padding(4.dp)
             .width(cardWidth.dp)
+            .height(100.dp)
             .clickable { selected(offersModel.title) },
         elevation = 8.dp
     ) {

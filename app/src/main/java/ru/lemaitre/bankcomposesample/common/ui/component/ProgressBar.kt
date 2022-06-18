@@ -12,14 +12,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ProgressBar() {
+fun ProgressBar(size: Int = 100) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         CircularProgressIndicator(
-            modifier = Modifier.size(100.dp),
+            modifier = Modifier.size(size.dp),
             color = Color.Black,
             strokeWidth = 10.dp
         )
