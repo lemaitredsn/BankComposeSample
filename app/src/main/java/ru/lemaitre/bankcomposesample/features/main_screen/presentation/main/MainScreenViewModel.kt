@@ -12,11 +12,13 @@ import ru.lemaitre.bankcomposesample.common.domain.OfferState
 import ru.lemaitre.bankcomposesample.common.domain.ProductState
 import ru.lemaitre.bankcomposesample.common.domain.StateData
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.MainScreenInteractor
+import ru.lemaitre.bankcomposesample.features.main_screen.domain.use_cases.CardsUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
-    private val interactor: MainScreenInteractor
+    private val interactor: MainScreenInteractor,
+    private val cardsUseCase: CardsUseCase
 ) : ViewModel() {
 
     private val _userName = mutableStateOf<String>("")
@@ -28,16 +30,19 @@ class MainScreenViewModel @Inject constructor(
     var isShowCard = mutableStateOf<Boolean>(true)// todo get from shared prefs
     var isShowAccount = mutableStateOf<Boolean>(true)
 
-    //todo сделать через state как _state
-    private val _commonProducts = mutableStateOf(ProductState())
-    val commonProducts: State<ProductState> = _commonProducts
+    private val _cards = mutableStateOf(ProductState())
+    val cards: State<ProductState> = _cards
+
+
+    private val _accounts = mutableStateOf(ProductState())
+    val accounts: State<ProductState> = _accounts
 
     init {
         getName()
         getOffers()
         showCards(isShowCard.value)
         showAccount(isShowAccount.value)
-        commonProducts()
+        loadCards()
     }
 
     private fun getName() {
@@ -59,16 +64,28 @@ class MainScreenViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun commonProducts() {
-        interactor.getCommonProducts().onEach { result ->
+    fun loadCards() {
+        cardsUseCase().onEach { result ->
             when (result) {
-                is StateData.Success -> _commonProducts.value =
+                is StateData.Success -> _cards.value =
                     ProductState(products = result.data ?: emptyList())
-                is StateData.Error -> _commonProducts.value =
+                is StateData.Error -> _cards.value =
                     ProductState(error = result.message ?: "Ошибка получения продуктов")
-                is StateData.Loading -> _commonProducts.value = ProductState(isLoading = true)
+                is StateData.Loading -> _cards.value = ProductState(isLoading = true)
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun loadAccount() {
+            cardsUseCase().onEach { result ->
+                when (result) {
+                    is StateData.Success -> _cards.value =
+                        ProductState(products = result.data ?: emptyList())
+                    is StateData.Error -> _cards.value =
+                        ProductState(error = result.message ?: "Ошибка получения продуктов")
+                    is StateData.Loading -> _cards.value = ProductState(isLoading = true)
+                }
+            }.launchIn(viewModelScope)
     }
 
     fun showAccount(boolean: Boolean) {

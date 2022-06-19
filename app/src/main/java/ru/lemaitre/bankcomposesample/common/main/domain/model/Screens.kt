@@ -1,7 +1,5 @@
 package ru.lemaitre.bankcomposesample.common.main.domain.model
 
-import ru.lemaitre.bankcomposesample.common.domain.Products
-
 sealed class Screens(
     val name: String
 ) {

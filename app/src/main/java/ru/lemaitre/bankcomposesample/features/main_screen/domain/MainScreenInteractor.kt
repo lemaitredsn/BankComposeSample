@@ -18,7 +18,6 @@ class MainScreenInteractor @Inject constructor(
         try {
             emit(StateData.Loading<List<OffersModel>>())
             delay(5000)
-            error("hello world")
             val offers = repository.getOffers()
             emit(StateData.Success<List<OffersModel>>(offers))
         } catch (e: Exception) {
@@ -27,32 +26,6 @@ class MainScreenInteractor @Inject constructor(
                     e.localizedMessage ?: "Произошла ошибка получения предложений"
                 )
             )
-        }
-
-    }
-
-    fun getCommonProducts(): Flow<StateData<List<Products>>> = flow {
-        try {
-            emit(StateData.Loading<List<Products>>())
-            val products = mapProducts(repository.getProducts())
-            emit(StateData.Success<List<Products>>(products))
-        }catch (e: Exception){
-            emit(
-                StateData.Error<List<Products>>(
-                    e.localizedMessage ?: "Произошла ошибка получения данных по продуктам"
-                )
-            )
-        }
-    }
-
-    private fun mapProducts(list: List<Products>): List<Products> {
-        return list.sortedBy {
-            when (it) {
-                is CardProductModel -> 1
-                is AccountProductModel -> 2
-                is EmptyCardModel -> 3
-                is OfferCardModel -> 4
-            }
         }
     }
 }

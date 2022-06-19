@@ -2,7 +2,10 @@ package ru.lemaitre.bankcomposesample.common.data
 
 import android.util.Log
 import ru.lemaitre.bankcomposesample.R
+import ru.lemaitre.bankcomposesample.common.data.models.AccountDTO
 import ru.lemaitre.bankcomposesample.common.data.models.AutoTransferDTO
+import ru.lemaitre.bankcomposesample.common.data.models.CardDTO
+import ru.lemaitre.bankcomposesample.common.data.models.ResultDTO
 import ru.lemaitre.bankcomposesample.common.domain.*
 import ru.lemaitre.bankcomposesample.common.ui.theme.Purple700
 import ru.lemaitre.bankcomposesample.common.ui.theme.orange400
@@ -21,53 +24,56 @@ import kotlin.random.Random
 
 class Storage @Inject constructor() {
 
-    fun getCardProduct(): List<CardProductModel> {
+    fun getCardProduct(): List<CardDTO> {
         return /*emptyList<CardProductModel>()*/ listOf( //FIXME this is UI model
-            CardProductModel(
-                number = "1321 3213 3213 0001",
-                typeCard = TypeCard.CREDIT,
-                paySystem = PaySystem.UNION_PAY,
-                amount = "999 999,91"
+            CardDTO(
+                number = "1321321332130001",
+                typeCard = "Зарплатная",
+                paySystem = "Мир",
+                amount = "99.2",
+                currency = "Рубль"
             ),
-            CardProductModel(
-                number = "1321 3213 3213 0002",
-                typeCard = TypeCard.DEBIT,
-                paySystem = PaySystem.MIR,
-                amount = "275 443,21"
+            CardDTO(
+                number = "1321321332130002",
+                typeCard = "Кредитная",
+                paySystem = "Мир",
+                amount = "99.2",
+                currency = "Рубль"
             ),
-            CardProductModel(
-                number = "1321 3213 3213 0003",
-                typeCard = TypeCard.SALARY,
-                paySystem = PaySystem.MASTER_CARD,
-                amount = "54 443,23"
+            CardDTO(
+                number = "1321321332130003",
+                typeCard = "Дебетовая",
+                paySystem = "Мир",
+                amount = "99.2",
+                currency = "Рубль"
             ),
-            CardProductModel(
-                number = "1321 3213 3213 0004",
-                typeCard = TypeCard.SALARY,
-                paySystem = PaySystem.VISA,
-                currency = Currency.DOLLAR,
-                amount = "1643,43"
+            CardDTO(
+                number = "1321321332130004",
+                typeCard = "Дебетовая",
+                paySystem = "Union pay",
+                amount = "99.2",
+                currency = "Доллар"
             ),
-            CardProductModel(
-                number = "1321 3213 3213 0005",
-                typeCard = TypeCard.DEBIT,
-                paySystem = PaySystem.MASTER_CARD,
-                currency = Currency.EURO,
-                amount = "88,76"
+            CardDTO(
+                number = "1321321332130005",
+                typeCard = "Дебетовая",
+                paySystem = "Union pay",
+                amount = "99.2",
+                currency = "Доллар"
             ),
-            CardProductModel(
-                number = "1321 3213 3213 0006",
-                typeCard = TypeCard.SALARY,
-                paySystem = PaySystem.VISA,
-                currency = Currency.DOLLAR,
-                amount = "1643,43"
+            CardDTO(
+                number = "1321321332130006",
+                typeCard = "Дебетовая",
+                paySystem = "Visa",
+                amount = "99.2",
+                currency = "Евро"
             ),
-            CardProductModel(
+            CardDTO(
                 number = "1321 3213 3213 0007",
-                typeCard = TypeCard.DEBIT,
-                paySystem = PaySystem.MASTER_CARD,
-                currency = Currency.EURO,
-                amount = "88,76"
+                typeCard = "Дебетовая",
+                paySystem = "Master Card",
+                amount = "99465.2",
+                currency = "Евро"
             ),
         )
     }
@@ -101,74 +107,37 @@ class Storage @Inject constructor() {
         )
     }
 
-    fun getAccountProducts(): List<AccountProductModel> {
+    fun getAccountProducts(): List<AccountDTO> {
         return listOf(
-            AccountProductModel( //FIXME UI model
-                typeAccount = TypeAccount.CURRENT,
-                userNameAccount = "Текущий",
-                number = "4258 1223 1365 1236 0001",
+            AccountDTO(
+                typeAccount = "Зарплатный",
+                number = "42581223136512360001",
                 amount = "4231",
-                currency = Currency.RUBLE,
-                status = "ок",
-                listOf(
-                    CardProductModel(
-                        typeCard = TypeCard.CREDIT,
-                        paySystem = PaySystem.UNION_PAY,
-                        amount = "999 999,91"
-                    )
-                )
+                currency = "Рубль",
+                status = "ок"
             ),
-            AccountProductModel(
-                typeAccount = TypeAccount.CURRENT,
-                userNameAccount = "Текущий",
-                number = "4258 1223 1365 1236 0002",
+            AccountDTO(
+                typeAccount = "Дебетовый",
+                number = "42581223136512360002",
                 amount = "4231",
-                currency = Currency.RUBLE,
-                status = "ок",
-                listOf(
-                    CardProductModel(
-                        typeCard = TypeCard.CREDIT,
-                        paySystem = PaySystem.UNION_PAY,
-                        amount = "999 999,91"
-                    )
-                )
+                currency = "Доллар",
+                status = "ок"
             ),
-            AccountProductModel(
-                typeAccount = TypeAccount.CURRENT,
-                userNameAccount = "Текущий",
-                number = "4258 1223 1365 1236 0003",
+            AccountDTO(
+                typeAccount = "Накопительный",
+                number = "42581223136512360003",
                 amount = "4231",
-                currency = Currency.RUBLE,
-                status = "ок",
-                listOf(
-                    CardProductModel(
-                        typeCard = TypeCard.CREDIT,
-                        paySystem = PaySystem.UNION_PAY,
-                        amount = "999 999,91"
-                    )
-                )
+                currency = "Евро",
+                status = "ок"
             ),
-            AccountProductModel(
-                typeAccount = TypeAccount.CURRENT,
-                userNameAccount = "Текущий",
-                number = "4258 1223 1365 1236 0004",
+            AccountDTO(
+                typeAccount = "Инвестиционный",
+                number = "42581223136512360004",
                 amount = "4231",
-                currency = Currency.RUBLE,
-                status = "ок",
-                listOf(
-                    CardProductModel(
-                        typeCard = TypeCard.CREDIT,
-                        paySystem = PaySystem.UNION_PAY,
-                        amount = "999 999,91"
-                    )
-                )
-            )
+                currency = "Рубль",
+                status = "ок"
+            ),
         )
-    }
-
-    fun getProducts(): List<Products> {
-        return getAccountProducts()
-            .plus(getCardProduct())
     }
 
     fun findCardHistory(number: String): List<HistoryItem> {
@@ -223,10 +192,10 @@ class Storage @Inject constructor() {
         val account = getAccountProducts().firstOrNull() { it.number == productNumber }
         val s = when {
             card != null -> {
-                DetailModel(
+                DetailModel( //fixme this is DTO
                     sum = card.amount,
                     number = card.number,
-                    icon = card.paySystem.icon,
+                    icon = -1,
                     findCardHistory(productNumber)
                 )
             }
@@ -234,7 +203,7 @@ class Storage @Inject constructor() {
                 DetailModel(
                     sum = account.amount,
                     number = account.number,
-                    icon = R.drawable.ic_card,
+                    icon = -1,
                     findAccountHistory(productNumber)
                 )
             }

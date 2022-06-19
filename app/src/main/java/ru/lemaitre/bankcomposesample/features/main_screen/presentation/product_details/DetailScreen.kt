@@ -60,8 +60,8 @@ fun DetailScreen(viewModel: DetailScreenViewModel) {
                         Spacer(modifier = Modifier.weight(1f))
                         Image(
                             painter = painterResource(
-                                id = viewModel.detailProduct.value.details.icon
-                                    ?: R.drawable.ic_card
+//                                id = viewModel.detailProduct.value.details.icon
+                                R.drawable.ic_card
                             ),
                             contentDescription = "drawable",
                             modifier = Modifier

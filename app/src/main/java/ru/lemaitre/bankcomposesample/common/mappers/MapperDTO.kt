@@ -1,6 +1,6 @@
 package ru.lemaitre.bankcomposesample.common.mappers
 
-import ru.lemaitre.bankcomposesample.common.data.ResultDTO
+import ru.lemaitre.bankcomposesample.common.data.models.ResultDTO
 import ru.lemaitre.bankcomposesample.common.domain.ResultModel
 
 object MapperDTO {
