@@ -15,6 +15,7 @@ import ru.lemaitre.bankcomposesample.common.domain.StateData
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.MainScreenInteractor
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.use_cases.AccountUseCase
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.use_cases.CardsUseCase
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.components.toUi
 import javax.inject.Inject
 
 @HiltViewModel
@@ -84,7 +85,7 @@ class MainScreenViewModel @Inject constructor(
             accountUseCase().onEach { result ->
                 when (result) {
                     is StateData.Success -> _accounts.value =
-                        AccountState(products = result.data ?: emptyList())
+                        AccountState(products = result.data?.map { it.toUi() } ?: emptyList())
                     is StateData.Error -> _accounts.value =
                         AccountState(error = result.message ?: "Ошибка получения продуктов")
                     is StateData.Loading -> _accounts.value = AccountState(isLoading = true)

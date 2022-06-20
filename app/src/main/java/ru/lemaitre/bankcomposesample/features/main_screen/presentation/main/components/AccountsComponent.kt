@@ -30,6 +30,8 @@ import ru.lemaitre.bankcomposesample.common.main.domain.model.Screens
 import ru.lemaitre.bankcomposesample.common.ui.theme.GrayAlpha54
 import ru.lemaitre.bankcomposesample.common.ui.theme.blueA400
 
+sealed class AccountsUi
+
 data class AccountUi(
     val typeAccount: TypeAccount,
     val number: String = "",
@@ -37,7 +39,33 @@ data class AccountUi(
     val currency: Currency = Currency.RUBLE,
     val status: String? = null,
     @DrawableRes val iconAccount: Int = R.drawable.ic_card,
+) : AccountsUi()
+
+data class OfferAccountUI(
+    val title: String,
+    @DrawableRes val icon: Int = R.drawable.ic_add_card
+) : AccountsUi()
+
+fun OfferAccountModel.toUi() = OfferAccountUI(
+    title = this.message
 )
+
+data class EmptyAccountUi(
+    val title: String,
+    @DrawableRes val icon: Int = R.drawable.ic_not_interested
+) : AccountsUi()
+
+fun EmptyAccountModel.toUi() = EmptyAccountUi(
+    title = this.message
+)
+
+fun Account.toUi(): AccountsUi {
+    return when (this) {
+        is AccountDomain -> this.toUi()
+        is OfferAccountModel -> this.toUi()
+        is EmptyAccountModel -> this.toUi()
+    }
+}
 
 fun AccountDomain.toUi() = AccountUi(
     typeAccount = typeAccount,
@@ -51,7 +79,7 @@ fun AccountDomain.toUi() = AccountUi(
 fun AccountsComponent(
     rotateCallback: (Boolean) -> Unit,
     startShow: Boolean,
-    accountUi: List<Account>,
+    accountUi: List<AccountsUi>,
     name: String = "Счета",
     navController: NavController,
     idNavigate: String = "account",
@@ -83,7 +111,8 @@ fun AccountsComponent(
             Column(modifier = Modifier
                 .padding(8.dp)
                 .clickable {
-                    navController.navigate(Screens.NewProduct.name + "/${idNavigate}") }) {
+                    navController.navigate(Screens.NewProduct.name + "/${idNavigate}")
+                }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_add_circle),
                     contentDescription = stringResource(id = R.string.main_screen_add_card)
@@ -92,10 +121,9 @@ fun AccountsComponent(
         }
     }
 
-    accountUi.forEach { account ->
+    accountUi.forEach { uiModel ->
         if (rotate) {
-            if(account is AccountDomain){
-                val uiModel = account.toUi()
+            if (uiModel is AccountUi) { //todo add offer, error
                 Card(
                     modifier = Modifier
                         .padding(4.dp, 2.dp)
@@ -135,7 +163,6 @@ fun AccountsComponent(
                     }
                 }
             }
-            //todo if(error,empty)
         }
     }
 }

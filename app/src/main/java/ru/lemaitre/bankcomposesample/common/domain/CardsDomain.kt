@@ -95,6 +95,14 @@ data class AccountDomain(
     val status: String?
 ): Account()
 
+data class EmptyAccountModel(
+    val message: String = "Пока у вас нет карт"
+): Account()
+
+data class OfferAccountModel(
+    val message: String = "Персональное предложение по карте"
+): Account()
+
 sealed class Cards
 
 data class CardsDomain(
