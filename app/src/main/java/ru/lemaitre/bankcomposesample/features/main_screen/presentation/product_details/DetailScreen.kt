@@ -21,7 +21,7 @@ fun DetailScreen(viewModel: DetailScreenViewModel) {
     if (viewModel.detailProduct.value.isLoading) {
         Text(text = "Загрузка")
     }
-    if (viewModel.detailProduct.value.error != null) {
+    if (viewModel.detailProduct.value.error.isNotEmpty()) {
         Text(text = "Ошибка")
     }
     Column() {
@@ -44,7 +44,7 @@ fun DetailScreen(viewModel: DetailScreenViewModel) {
                     Spacer(modifier = Modifier.weight(1f))
                     Row() {
                         Text(
-                            text = "${viewModel.detailProduct.value.details.sum}$",
+                            text = "${viewModel.detailProduct.value.details.sum} ${viewModel.detailProduct.value.details.currency.character}",
                             modifier = Modifier
                                 .padding(8.dp)
                                 .weight(1f)
@@ -60,7 +60,6 @@ fun DetailScreen(viewModel: DetailScreenViewModel) {
                         Spacer(modifier = Modifier.weight(1f))
                         Image(
                             painter = painterResource(
-//                                id = viewModel.detailProduct.value.details.icon
                                 R.drawable.ic_card
                             ),
                             contentDescription = "drawable",
@@ -103,12 +102,11 @@ fun HistoryItemView(history: HistoryItem) {
                     modifier = Modifier.weight(1f)
                 )
                 Text(
-                    text = history.sum.toString(), modifier = Modifier
+                    text = "${history.sum} - ${history.description}", modifier = Modifier
                         .padding(4.dp)
                         .weight(9f)
                 )
             }
-            Text(text = history.description)
         }
     }
 }

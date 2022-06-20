@@ -142,25 +142,28 @@ class Storage @Inject constructor() {
 
     fun findCardHistory(number: String): List<HistoryItem> {
         return when {
-            number == "1321 3213 3213 0001" -> listOf(
-                HistoryItem(123.0, true, "Тест")
+            number == "1321321332130001" -> listOf(
+                HistoryItem(123.0, true, "покупка продуктов"),
+                HistoryItem(3222.0, false, "суточные"),
+                HistoryItem(863.0, true, "кино"),
+                HistoryItem(12300.0, false, "аванс"),
             )
-            number == "1321 3213 3213 0002" -> listOf(
+            number == "1321321332130002" -> listOf(
                 HistoryItem(321.0, true, "Тестовые")
             )
-            number == "1321 3213 3213 0003" -> listOf(
+            number == "1321321332130003" -> listOf(
                 HistoryItem(321.0, true, "Тестовые")
             )
-            number == "1321 3213 3213 0004" -> listOf(
+            number == "1321321332130004" -> listOf(
                 HistoryItem(321.0, true, "Тестовые")
             )
-            number == "1321 3213 3213 0005" -> listOf(
+            number == "1321321332130005" -> listOf(
                 HistoryItem(321.0, true, "Тестовые")
             )
-            number == "1321 3213 3213 0006" -> listOf(
+            number == "1321321332130006" -> listOf(
                 HistoryItem(321.0, true, "Тестовые")
             )
-            number == "1321 3213 3213 0007" -> listOf(
+            number == "1321321332130007" -> listOf(
                 HistoryItem(321.0, true, "Тестовые")
             )
             else -> emptyList()
@@ -170,16 +173,16 @@ class Storage @Inject constructor() {
 
     fun findAccountHistory(number: String): List<HistoryItem> {
         return when {
-            number == "4258 1223 1365 1236 0001" -> listOf(
+            number == "42581223136512360001" -> listOf(
                 HistoryItem(12423.0, true, "Тест")
             )
-            number == "4258 1223 1365 1236 0002" -> listOf(
+            number == "42581223136512360002" -> listOf(
                 HistoryItem(343121.0, true, "Тестовые")
             )
-            number == "4258 1223 1365 1236 0003" -> listOf(
+            number == "42581223136512360003" -> listOf(
                 HistoryItem(352321.0, true, "Тестовые")
             )
-            number == "4258 1223 1365 1236 0004" -> listOf(
+            number == "42581223136512360004" -> listOf(
                 HistoryItem(754321.0, true, "Тестовые")
             )
             else -> emptyList()
@@ -187,32 +190,30 @@ class Storage @Inject constructor() {
     }
 
     fun getHistory(productNumber: String): DetailModel {
-        Log.e("TAG", "getHistory $productNumber")
         val card = getCardProduct().firstOrNull() { it.number == productNumber }
         val account = getAccountProducts().firstOrNull() { it.number == productNumber }
-        val s = when {
+        val details = when {
             card != null -> {
-                DetailModel( //fixme this is DTO
+                DetailModel(
                     sum = card.amount,
                     number = card.number,
-                    icon = -1,
-                    findCardHistory(productNumber)
+                    currency = Currency.fromString(card.currency),
+                    historyProduct = findCardHistory(productNumber)
                 )
             }
             account != null -> {
                 DetailModel(
                     sum = account.amount,
                     number = account.number,
-                    icon = -1,
-                    findAccountHistory(productNumber)
+                    currency = Currency.fromString(account.currency),
+                    historyProduct = findAccountHistory(productNumber)
                 )
             }
             else -> {
                 throw IllegalArgumentException("Продукта по номеру ненйдено")
             }
         }
-        Log.e("TAG", "$s")
-        return s
+        return details
 
     }
 
