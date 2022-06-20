@@ -6,7 +6,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.toUpperCase
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -16,7 +15,6 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.launch
-import ru.lemaitre.bankcomposesample.common.domain.ProductState
 import ru.lemaitre.bankcomposesample.common.main.MainActivity
 import ru.lemaitre.bankcomposesample.common.mappers.MapperUI.toUI
 import ru.lemaitre.bankcomposesample.common.ui.models.ResultUI

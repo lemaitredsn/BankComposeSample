@@ -85,6 +85,7 @@ enum class Currency(val title: String, val character: String) {
     }
 }
 
+sealed class Account
 
 data class AccountDomain(
     val typeAccount: TypeAccount = TypeAccount.CURRENT,
@@ -92,7 +93,7 @@ data class AccountDomain(
     val amount: String,
     val currency: Currency = Currency.RUBLE,
     val status: String?
-)
+): Account()
 
 sealed class Cards
 

@@ -20,6 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ru.lemaitre.bankcomposesample.R
 import ru.lemaitre.bankcomposesample.common.main.domain.model.Screens
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.components.AccountsComponent
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.components.CardsComponent
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.components.OffersMainScreen
 
@@ -86,7 +87,17 @@ fun MainScreen(
                     navController.navigate(Screens.CardDetails.name + "/${it}")
                 }
             }
-            //todo add products
+            item {
+                AccountsComponent(
+                    rotateCallback = viewModel::showAccount,
+                    startShow = true,
+                    accountUi = viewModel.accounts.value.products,
+                    navController = navController,
+                ) {
+                    navController.navigate(Screens.CardDetails.name + "/${it}")
+                }
+                //todo add products
+            }
         }
     }
 }
