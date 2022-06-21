@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import ru.lemaitre.bankcomposesample.common.domain.AccountState
-import ru.lemaitre.bankcomposesample.common.domain.OfferState
 import ru.lemaitre.bankcomposesample.common.domain.CardState
+import ru.lemaitre.bankcomposesample.common.domain.OfferState
 import ru.lemaitre.bankcomposesample.common.domain.StateData
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.MainScreenInteractor
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.use_cases.AccountUseCase
 import ru.lemaitre.bankcomposesample.features.main_screen.domain.use_cases.CardsUseCase
-import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.components.toUi
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.mappers.toUi
 import javax.inject.Inject
 
 @HiltViewModel

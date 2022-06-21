@@ -1,7 +1,5 @@
 package ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.components
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,55 +23,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.lemaitre.bankcomposesample.R
-import ru.lemaitre.bankcomposesample.common.domain.*
 import ru.lemaitre.bankcomposesample.common.main.domain.model.Screens
 import ru.lemaitre.bankcomposesample.common.ui.theme.GrayAlpha54
 import ru.lemaitre.bankcomposesample.common.ui.theme.blueA400
-
-sealed class AccountsUi
-
-data class AccountUi(
-    val typeAccount: TypeAccount,
-    val number: String = "",
-    val amount: String = "1523,12",
-    val currency: Currency = Currency.RUBLE,
-    val status: String? = null,
-    @DrawableRes val iconAccount: Int = R.drawable.ic_card,
-) : AccountsUi()
-
-data class OfferAccountUI(
-    val title: String,
-    @DrawableRes val icon: Int = R.drawable.ic_add_card
-) : AccountsUi()
-
-fun OfferAccountModel.toUi() = OfferAccountUI(
-    title = this.message
-)
-
-data class EmptyAccountUi(
-    val title: String,
-    @DrawableRes val icon: Int = R.drawable.ic_not_interested
-) : AccountsUi()
-
-fun EmptyAccountModel.toUi() = EmptyAccountUi(
-    title = this.message
-)
-
-fun Account.toUi(): AccountsUi {
-    return when (this) {
-        is AccountDomain -> this.toUi()
-        is OfferAccountModel -> this.toUi()
-        is EmptyAccountModel -> this.toUi()
-    }
-}
-
-fun AccountDomain.toUi() = AccountUi(
-    typeAccount = typeAccount,
-    number = number,
-    amount = amount,
-    currency = currency,
-    status = status
-)
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.models.AccountUi
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.models.AccountsUi
 
 @Composable
 fun AccountsComponent(

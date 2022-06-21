@@ -1,6 +1,6 @@
 package ru.lemaitre.bankcomposesample.common.domain
 
-import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.components.AccountsUi
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.models.AccountsUi
 
 
 data class CardState(
