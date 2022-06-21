@@ -1,4 +1,4 @@
-package ru.lemaitre.bankcomposesample.features.transfers_screen.presentation
+package ru.lemaitre.bankcomposesample.features.transfers_screen.presentation.transfers
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.*

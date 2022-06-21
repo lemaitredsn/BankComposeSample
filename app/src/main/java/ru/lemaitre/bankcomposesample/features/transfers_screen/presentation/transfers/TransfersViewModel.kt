@@ -1,4 +1,4 @@
-package ru.lemaitre.bankcomposesample.features.transfers_screen.presentation
+package ru.lemaitre.bankcomposesample.features.transfers_screen.presentation.transfers
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

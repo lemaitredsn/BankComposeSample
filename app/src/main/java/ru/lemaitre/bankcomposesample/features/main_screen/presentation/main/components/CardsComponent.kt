@@ -25,6 +25,7 @@ import androidx.navigation.NavController
 import ru.lemaitre.bankcomposesample.R
 import ru.lemaitre.bankcomposesample.common.domain.CardsDomain
 import ru.lemaitre.bankcomposesample.common.main.domain.model.Screens
+import ru.lemaitre.bankcomposesample.common.ui.component.CardItem
 import ru.lemaitre.bankcomposesample.common.ui.theme.GrayAlpha54
 import ru.lemaitre.bankcomposesample.common.ui.theme.blueA400
 import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.mappers.toUi
@@ -67,7 +68,8 @@ fun CardsComponent(
             Column(modifier = Modifier
                 .padding(8.dp)
                 .clickable {
-                    navController.navigate(Screens.NewProduct.name + "/${idNavigate}") }) {
+                    navController.navigate(Screens.NewProduct.name + "/${idNavigate}")
+                }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_add_circle),
                     contentDescription = stringResource(id = R.string.main_screen_add_card)
@@ -78,48 +80,8 @@ fun CardsComponent(
 
     cardsUi.forEach { uiModel ->
         if (rotate) {
-            if(uiModel is CardUi){
-                Card(
-                    modifier = Modifier
-                        .padding(4.dp, 2.dp)
-                        .fillMaxHeight()
-                        .fillMaxWidth()
-                        .clickable { selected(uiModel.number) },
-                    elevation = 8.dp
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.background(blueA400)
-                    ) {
-                        Image(
-                            painter = painterResource(id = uiModel.iconPaySystem),
-                            contentDescription = uiModel.paySystem.title,
-                            modifier = Modifier
-                                .padding(8.dp)
-                                .clip(CircleShape)
-                                .width(50.dp)
-                                .height(50.dp)
-                                .background(GrayAlpha54)
-                                .padding(8.dp)
-                        )
-                        Column(modifier = Modifier.weight(1f))
-                        {
-                            Text(uiModel.typeCard.title)
-                            Text(
-                                stringResource(
-                                    id = R.string.main_screen_card_end,
-                                    uiModel.number.takeLast(4)
-                                )
-                            )
-                        }
-                        Column(
-                            modifier = Modifier
-                                .padding(end = 16.dp)
-                        ) {
-                            Text(text = "${uiModel.amount} ${uiModel.currency.character}")
-                        }
-                    }
-                }
+            if (uiModel is CardUi) {
+                CardItem(uiModel = uiModel, selected = selected)
             }
             //todo if(error,empty)
         }

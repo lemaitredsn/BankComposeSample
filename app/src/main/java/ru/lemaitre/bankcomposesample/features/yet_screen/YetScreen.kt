@@ -14,8 +14,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.lemaitre.bankcomposesample.R
-import ru.lemaitre.bankcomposesample.features.transfers_screen.presentation.TransferItem
-import ru.lemaitre.bankcomposesample.features.transfers_screen.presentation.Transfers
+import ru.lemaitre.bankcomposesample.features.transfers_screen.presentation.transfers.TransferItem
+import ru.lemaitre.bankcomposesample.features.transfers_screen.presentation.transfers.Transfers
 
 //Еще
 @Composable
