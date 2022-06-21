@@ -1,7 +1,5 @@
 package ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.components
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,38 +23,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.lemaitre.bankcomposesample.R
-import ru.lemaitre.bankcomposesample.common.domain.*
+import ru.lemaitre.bankcomposesample.common.domain.CardsDomain
 import ru.lemaitre.bankcomposesample.common.main.domain.model.Screens
 import ru.lemaitre.bankcomposesample.common.ui.theme.GrayAlpha54
 import ru.lemaitre.bankcomposesample.common.ui.theme.blueA400
-
-data class CardsUi(
-    val typeCard: TypeCard = TypeCard.SALARY,
-    val paySystem: PaySystem = PaySystem.MIR,
-    val number: String = "",
-    val amount: String = "1523,12",
-    val currency: Currency = Currency.RUBLE,
-    val status: String? = null,
-    @DrawableRes val iconPaySystem: Int,
-    @DrawableRes val iconCard: Int = R.drawable.ic_card,
-)
-
-fun CardsDomain.toUi() = CardsUi(
-    typeCard = this.typeCard,
-    paySystem = this.paySystem,
-    number = this.number,
-    amount = this.amount,
-    currency = this.currency,
-    status = this.status,
-    iconCard = R.drawable.ic_card, //fixme change this test
-    iconPaySystem = this.paySystem.getIcon()
-)
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.mappers.toUi
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.models.CardUi
+import ru.lemaitre.bankcomposesample.features.main_screen.presentation.main.models.CardsUi
 
 @Composable
 fun CardsComponent(
     rotateCallback: (Boolean) -> Unit,
     startShow: Boolean,
-    cardsUi: List<Cards>,
+    cardsUi: List<CardsUi>,
     name: String = "Карты",
     navController: NavController,
     idNavigate: String = "card",
@@ -97,10 +76,9 @@ fun CardsComponent(
         }
     }
 
-    cardsUi.forEach {
+    cardsUi.forEach { uiModel ->
         if (rotate) {
-            if(it is CardsDomain){
-                val uiModel = it.toUi()
+            if(uiModel is CardUi){
                 Card(
                     modifier = Modifier
                         .padding(4.dp, 2.dp)

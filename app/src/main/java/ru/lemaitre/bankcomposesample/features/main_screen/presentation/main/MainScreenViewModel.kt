@@ -73,7 +73,7 @@ class MainScreenViewModel @Inject constructor(
         cardsUseCase().onEach { result ->
             when (result) {
                 is StateData.Success -> _cards.value =
-                    CardState(products = result.data ?: emptyList())
+                    CardState(products = result.data?.map { it.toUi() } ?: emptyList())
                 is StateData.Error -> _cards.value =
                     CardState(error = result.message ?: "Ошибка получения продуктов")
                 is StateData.Loading -> _cards.value = CardState(isLoading = true)
